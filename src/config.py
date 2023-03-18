@@ -1,1 +1,2 @@
 WEATHER_API_KEY = ''
+BOT_NAME = 'Chatbot'
