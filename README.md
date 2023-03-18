@@ -7,6 +7,7 @@ You also need to install the following Python packages:
 - requests
 - textblob
 - nltk
+- deep_translator
 
 You can install these packages using the following command:
 ```
