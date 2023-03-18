@@ -59,11 +59,20 @@ def get_weather_info():
 
     return response
 
+def get_math_calc(user_input):
+    expression = user_input.split('math ')[1]
+    try:
+        result = eval(expression)
+        response = f"The result of the calculation is {result}!"
+    except:
+        response = "Sorry, I couldn't perform that calculation."
+    return response
+
 def load_responses():
     with open('responses.json') as f:
         responses = json.load(f)
     return responses
-
+    
 def chatbot():
     # Greeting message
     print(f"Chatbot: Hi, I'm a chatbot. What can I help you with today?")
@@ -105,13 +114,8 @@ def chatbot():
         
         # Check if the user wants to do math
         if 'math' in lemmas and len(lemmas) > 1:
-            expression = user_input.split('math ')[1]
-            try:
-                result = eval(expression)
-                response = f"The result of the calculation is {result}!"
-            except:
-                response = "Sorry, I couldn't perform that calculation."
-            print(f"Chatbot: {response}")
+            math_response = get_math_calc(user_input)
+            print(f"Chatbot: {math_response}")
             continue
 
         # Exit condition
