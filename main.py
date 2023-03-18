@@ -1,6 +1,7 @@
 import random
 import geocoder
 import requests
+import json
 from textblob import TextBlob
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -30,59 +31,58 @@ def get_weather_info():
 
     return response
 
-# Defining the responses
-RESPONSES = {
-    "hello": ["Hi there!", "Hello!", "Greetings!"],
-    "how are you": ["I'm doing well, thank you.", "I'm fine, thanks for asking.", "I'm good, how about you?"],
-    "what's your name": ["My name is Chatbot.", "I'm Chatbot, nice to meet you.", "I go by the name Chatbot."],
-    "who are you": ["My name is Chatbot.", "I'm Chatbot, nice to meet you.", "I go by the name Chatbot."],
-    "bye": ["Goodbye!", "See you later!", "Take care!"],
-    "thank you": ["You're welcome!", "No problem!", "Anytime!"],
-    "how old are you": ["I don't have an age, I'm a chatbot!", "I'm ageless, I'm a chatbot!", "I don't age, I'm a chatbot!"],
-    "what's the weather like": [get_weather_info()],
-}
+def load_responses():
+    with open('responses.json') as f:
+        responses = json.load(f)
+    return responses
 
-# Defining the chatbot function
 def chatbot():
     # Greeting message
     print("Hi, I'm a chatbot. What can I help you with today?")
-    
-    # Chatting loop
+
+    responses = load_responses()
+
     while True:
         # User input
         user_input = input().lower()
-        
-        # Tokenize the user's input
+
+        # Tokenize and lemmatize the user's input
         tokens = word_tokenize(user_input)
-        # Lemmatize the tokens
         lemmatizer = WordNetLemmatizer()
         lemmas = [lemmatizer.lemmatize(token) for token in tokens]
-                
+
         # Exit condition
         if user_input == "bye":
-            response = random.choice(RESPONSES["bye"])
+            response = random.choice(responses["bye"])
             print(response)
             break
-        for key in RESPONSES.keys():
+
+        # Checkfor a matching response
+        for key in responses.keys():
             if any(lemma in key for lemma in lemmas):
-                responses = random.choice(RESPONSES[key])
-                print(responses)
-                break
-            # Sentiment analysis
-            blob = TextBlob(user_input)
-            sentiment = blob.sentiment.polarity
-            if sentiment > 0.5:
-                response = "That's great to hear!"
-                print(response)
-                break
-            elif sentiment < -0.5:
-                response = "I'm sorry to hear that."
+                response = random.choice(responses[key])
                 print(response)
                 break
         else:
+            # If no response has been given yet, provide a generic response
             response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
             print(response)
-            
-                        
-# Calling the chatbot function
-chatbot()
+
+        # Sentiment analysis
+        blob = TextBlob(user_input)
+        sentiment = blob.sentiment.polarity
+
+        if sentiment > 0.5:
+            response = "That's great to hear!"
+            print(response)
+        elif sentiment < -0.5:
+            response = "I'm sorry to hear that."
+            print(response)
+
+        # Check if the user asked about the weather
+        if 'weather' in lemmas:
+            weather_response = get_weather_info()
+            print(weather_response)
+
+if __name__ == '__main__':
+    chatbot()
