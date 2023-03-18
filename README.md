@@ -1,6 +1,6 @@
 ## Installation
 
-You need to have Python 3 installed on your computer. You can download Python from the official website: https://www.python.org/downloads/
+You need to have Python 3 installed on your computer. You can download Python from the official website: [Python](https://www.python.org/downloads/)
 
 You also need to install the following Python packages:
 - geocoder
@@ -31,4 +31,4 @@ Here are some examples of things you can say to the chatbot:
 Additionally, each command has alternative phrasings that can be used to trigger the corresponding action
 For example, instead of typing 'time', you can ask 'What time is it?' and the chatbot will provide the current time
 
-To use the weather feature, you will need to obtain an API key from OpenWeather. Once you have obtained the key, you can add it to your ```config.py``` file under ```WEATHER_API_KEY = 'YOUR_API_KEY'```
+To use the weather feature, you will need to obtain an API key from [OpenWeather](https://openweathermap.org/). Once you have obtained the key, you can add it to your ```config.py``` file under ```WEATHER_API_KEY = 'YOUR_API_KEY'```
