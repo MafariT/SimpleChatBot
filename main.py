@@ -50,6 +50,12 @@ def chatbot():
         tokens = word_tokenize(user_input)
         lemmatizer = WordNetLemmatizer()
         lemmas = [lemmatizer.lemmatize(token) for token in tokens]
+        
+        # Check if the user asked about the weather
+        if 'weather' in lemmas:
+            weather_response = get_weather_info()
+            print(weather_response)
+            continue
 
         # Exit condition
         if user_input == "bye":
@@ -65,24 +71,19 @@ def chatbot():
                 break
         else:
             # If no response has been given yet, provide a generic response
-            response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
-            print(response)
-
-        # Sentiment analysis
-        blob = TextBlob(user_input)
-        sentiment = blob.sentiment.polarity
-
-        if sentiment > 0.5:
-            response = "That's great to hear!"
-            print(response)
-        elif sentiment < -0.5:
-            response = "I'm sorry to hear that."
-            print(response)
-
-        # Check if the user asked about the weather
-        if 'weather' in lemmas:
-            weather_response = get_weather_info()
-            print(weather_response)
-
+            # Sentiment analysis
+            blob = TextBlob(user_input)
+            sentiment = blob.sentiment.polarity
+            if sentiment > 0.5:
+                response = "That's great to hear!"
+                print(response)
+            elif sentiment < -0.5:
+                response = "I'm sorry to hear that."
+                print(response)
+            else:
+                # If sentiment is neutral, provide a generic response
+                response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
+                print(response)
+                
 if __name__ == '__main__':
     chatbot()
