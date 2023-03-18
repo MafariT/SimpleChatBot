@@ -14,9 +14,9 @@ You'll also need to install the following Python packages:
 - nltk
 
 You can install these packages using the following command:
-
+```
 pip install -r requirements.txt
-
+```
 
 ## Usage
 
