@@ -20,7 +20,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-To use SimpleChatBot, simply run the chatbot.py file in a Python environment. The chatbot will greet you and ask what it can help you with. You can then type in your message and the chatbot will respond accordingly.
+To use SimpleChatBot, simply run the main.py file in a Python environment or just click the start.bat. The chatbot will greet you and ask what it can help you with. You can then type in your message and the chatbot will respond accordingly.
 
 Here are some examples of things you can say to the chatbot:
 
