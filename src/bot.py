@@ -53,13 +53,11 @@ def get_weather_info():
     g = geocoder.ip('me')
     lat, lon = g.latlng
 
-    # Use the OpenWeatherMap API to get the current weather data for the user's location
     api_key = config.WEATHER_API_KEY
     url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
     response = requests.get(url)
 
     if response.status_code == 200:
-        # Parse the weather data and extract the relevant information
         data = response.json()
         temperature = data['main']['temp']
         humidity = data['main']['humidity']
@@ -68,7 +66,6 @@ def get_weather_info():
         # Format the weather information into a response
         response = f"The current temperature is {temperature} degrees Celsius with {humidity}% humidity. The weather is {description}."
     else:
-        # Handle errors
         response = "Sorry, I couldn't retrieve the weather information at this time."
 
     return response
