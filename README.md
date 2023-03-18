@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-To use SimpleChatBot, simply run the main.py file in a Python environment or just click the start.bat
+To use SimpleChatBot, simply run the main.py file in a Python environment or download the executable [Release](https://github.com/MafariT/SimpleChatBot/releases)
 
 Here are some examples of things you can say to the chatbot:
 
@@ -27,6 +27,7 @@ Here are some examples of things you can say to the chatbot:
 - time: Provides information on the current time
 - weather: Provides weather information for the specified location
 - bye: Exits the chatbot
+
         
 Additionally, each command has alternative phrasings that can be used to trigger the corresponding action
 For example, instead of typing 'time', you can ask 'What time is it?' and the chatbot will provide the current time
