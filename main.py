@@ -3,12 +3,35 @@ import geocoder
 import requests
 import json
 import nltk
+import datetime
 from textblob import TextBlob
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
 nltk.download('punkt')
 nltk.download('wordnet')
+
+def get_help_info():
+    # Define the usable commands
+    commands = [
+        "1. Ask about the weather",
+        "2. Ask for the current time",
+        "3. Ask for what day is it"
+        "4. Do math ('math 1 + 1')",
+        "5. Say 'bye' to exit the chatbot",
+    ]
+    response = "Here are the things you can ask me:\n" + "\n".join(commands)
+    return response
+
+def get_day_info():
+    now = datetime.datetime.now()
+    response = f"Today is {now.strftime('%A, %B %d, %Y')}."
+    return response
+
+def get_time_info():
+    now = datetime.datetime.now()
+    response = f"The current time is {now.strftime('%I:%M %p')}"
+    return response
 
 def get_weather_info():
     # Get the user's location using geolocation
@@ -59,6 +82,25 @@ def chatbot():
         if 'weather' in lemmas:
             weather_response = get_weather_info()
             print(f"Chatbot: {weather_response}")
+            continue
+        
+        # Check if the user wants help
+        if 'help' in lemmas:
+            help_response = get_help_info()
+            print(f"Chatbot: {help_response}")
+            continue
+        
+        # Check if the user wants to know the day
+        if 'day' in lemmas:
+            day_response = get_day_info()
+            print(f"Chabot: {day_response}")
+            continue
+
+        
+        # Check if the user wants to know the time
+        if 'time' in lemmas:
+            time_response = get_time_info()
+            print(f"Chatbot: {time_response}")
             continue
         
         # Check if the user wants to do math
