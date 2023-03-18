@@ -1,9 +1,8 @@
 {
 "hello": ["Hi there!", "Hello!", "Greetings!"],
-"how are you": ["I'm doing well, thank you.", "I'm fine, thanks for asking.", "I'm good, how about you?"],
-"what's your name": ["My name is Chatbot.", "I'm Chatbot, nice to meet you.", "I go by the name Chatbot."],
-"who are you": ["My name is Chatbot.", "I'm Chatbot, nice to meet you.", "I go by the name Chatbot."],
+"name": ["My name is Chatbot.", "I'm Chatbot, nice to meet you.", "I go by the name Chatbot."],
+"who": ["I'm a chatbot created by Mafari."],
 "bye": ["Goodbye!", "See you later!", "Take care!"],
-"thank you": ["You're welcome!", "No problem!", "Anytime!"],
-"how old are you": ["I don't have an age, I'm a chatbot!", "I'm ageless, I'm a chatbot!", "I don't age, I'm a chatbot!"]
+"thanks": ["You're welcome!", "No problem!", "Anytime!"],
+"old": ["I don't have an age, I'm a chatbot!", "I'm ageless, I'm a chatbot!", "I don't age, I'm a chatbot!"]
 }
