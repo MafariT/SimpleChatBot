@@ -141,7 +141,7 @@ def chatbot():
             continue
 
         # Exit condition
-        if user_input == "bye":
+        if 'bye' in lemmas:
             response = random.choice(responses["bye"])
             print(f"{config.BOT_NAME}: {response}")
             break
