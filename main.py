@@ -4,6 +4,7 @@ import requests
 import json
 import nltk
 import datetime
+import config
 from textblob import TextBlob
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -39,7 +40,7 @@ def get_weather_info():
     lat, lon = g.latlng
 
     # Use the OpenWeatherMap API to get the current weather data for the user's location
-    api_key = '635e950ebaf0c81a997d2515082f71fd'
+    api_key = config.WEATHER_API_KEY
     url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
     response = requests.get(url)
 
