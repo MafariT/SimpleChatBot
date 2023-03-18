@@ -17,7 +17,7 @@ def get_help_info():
     commands = [
         "1. Ask about the weather",
         "2. Ask for the current time",
-        "3. Ask for what day is it"
+        "3. Ask for what day is it",
         "4. Do math ('math 1 + 1')",
         "5. Say 'bye' to exit the chatbot",
     ]
