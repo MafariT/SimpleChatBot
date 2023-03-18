@@ -144,6 +144,3 @@ def chatbot():
                 # If sentiment is neutral, provide a generic response
                 response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
                 print(f"Chatbot: {response}")
-                
-if __name__ == '__main__':
-    chatbot()
