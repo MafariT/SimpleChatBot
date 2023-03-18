@@ -4,12 +4,13 @@ import requests
 import json
 import nltk
 import datetime
-import src.config as config
-from deep_translator import GoogleTranslator
-from textblob import TextBlob
+from src.config import WEATHER_API_KEY
+from src.config import BOT_NAME
+from src.logger import setup_logger
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
-from src.logger import setup_logger
+from deep_translator import GoogleTranslator
+from textblob import TextBlob
 
 
 logger = setup_logger('chatbot_logger', 'chatbot.log')
@@ -59,7 +60,7 @@ def get_weather_info():
     g = geocoder.ip('me')
     lat, lon = g.latlng
 
-    api_key = config.WEATHER_API_KEY
+    api_key = WEATHER_API_KEY
     url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
     response = requests.get(url)
 
@@ -99,7 +100,7 @@ def tokenize_and_lemmatize(user_input):
 def chatbot():
     logger.info('Greeting message displayed')
     # Greeting message
-    print(f"{config.BOT_NAME}: Hi, I'm a chatbot. What can I help you with today?")
+    print(f"{BOT_NAME}: Hi, I'm a chatbot. What can I help you with today?")
 
     responses = load_responses()
 
@@ -112,57 +113,57 @@ def chatbot():
         # Check if the user wants to translate text
         if "translate" in lemmas:
             translate_text_response = translate_text_from_input(lemmas)
-            print(f"{config.BOT_NAME}: {translate_text_response}")
+            print(f"{BOT_NAME}: {translate_text_response}")
             logger_info_bot(translate_text_response)
             continue
         
         # Check if the user wants help
         if 'help' in lemmas:
             help_response = get_help_info()
-            print(f"{config.BOT_NAME}: {help_response}")
+            print(f"{BOT_NAME}: {help_response}")
             logger_info_bot(help_response)
             continue
         
         # Check if the user wants to know the day
         if 'day' in lemmas:
             day_response = get_day_info()
-            print(f"{config.BOT_NAME}: {day_response}")
+            print(f"{BOT_NAME}: {day_response}")
             logger_info_bot(day_response)
             continue
 
         # Check if the user wants to know the time
         if 'time' in lemmas:
             time_response = get_time_info()
-            print(f"{config.BOT_NAME}: {time_response}")
+            print(f"{BOT_NAME}: {time_response}")
             logger_info_bot(time_response)
             continue
         
         # Check if the user asked about the weather
         if 'weather' in lemmas:
             weather_response = get_weather_info()
-            print(f"{config.BOT_NAME}: {weather_response}")
+            print(f"{BOT_NAME}: {weather_response}")
             logger_info_bot(weather_response)
             continue
         
         # Check if the user wants to do math
         if 'math' in lemmas and len(lemmas) > 1:
             math_response = get_math_calc(user_input)
-            print(f"{config.BOT_NAME}: {math_response}")
+            print(f"{BOT_NAME}: {math_response}")
             logger_info_bot(math_response)
             continue
 
-        # Exit condition
+        # Check if the user wants to quit
         if 'bye' in lemmas:
             response = random.choice(responses["bye"])
-            print(f"{config.BOT_NAME}: {response}")
+            print(f"{BOT_NAME}: {response}")
             logger_info_bot(response)
             break
 
-        # Checkfor a matching response
+        # Check for a matching response
         for key in responses.keys():
             if any(lemma in key for lemma in lemmas):
                 response = random.choice(responses[key])
-                print(f"{config.BOT_NAME}: {response}")
+                print(f"{BOT_NAME}: {response}")
                 logger_info_bot(response)
                 break
         else:
@@ -171,13 +172,13 @@ def chatbot():
             sentiment = blob.sentiment.polarity
             if sentiment > 0.5:
                 response = "That's great to hear!"
-                print(f"{config.BOT_NAME}: {response}")
+                print(f"{BOT_NAME}: {response}")
                 logger_info_bot(response)
             elif sentiment < -0.5:
                 response = "I'm sorry to hear that."
-                print(f"{config.BOT_NAME}: {response}")
+                print(f"{BOT_NAME}: {response}")
                 logger_info_bot(response)
             else:
                 response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
-                print(f"{config.BOT_NAME}: {response}")
+                print(f"{BOT_NAME}: {response}")
                 logger_info_bot(response)
