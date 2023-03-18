@@ -15,14 +15,8 @@ nltk.download('wordnet')
 
 def get_help_info():
     # Define the usable commands
-    commands = [
-        "1. Ask about the weather",
-        "2. Ask for the current time",
-        "3. Ask for what day is it",
-        "4. Translate text ('translate who are you to french)",
-        "5. Do math ('math 1 + 1')",
-        "6. Say 'bye' to exit the chatbot",
-    ]
+    with open('src/commands.json', 'r') as f:
+        commands = json.load(f)['commands']
     response = "Here are the things you can ask me:\n" + "\n".join(commands)
     return response
 
