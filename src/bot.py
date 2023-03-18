@@ -5,6 +5,7 @@ import json
 import nltk
 import datetime
 import src.config as config
+from deep_translator import GoogleTranslator
 from textblob import TextBlob
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -18,11 +19,30 @@ def get_help_info():
         "1. Ask about the weather",
         "2. Ask for the current time",
         "3. Ask for what day is it",
-        "4. Do math ('math 1 + 1')",
-        "5. Say 'bye' to exit the chatbot",
+        "4. Translate text ('translate who are you to french)",
+        "5. Do math ('math 1 + 1')",
+        "6. Say 'bye' to exit the chatbot",
     ]
     response = "Here are the things you can ask me:\n" + "\n".join(commands)
     return response
+
+def translate_text(text, target_language):
+    translated_text = GoogleTranslator(source='auto', target=target_language).translate(text)
+    return translated_text
+
+def translate_text_from_input(lemmas):
+    # Get the text to translate and the target language
+    translate_index = lemmas.index("translate")
+    text_to_translate = " ".join(lemmas[translate_index+1:])
+    target_language_index = lemmas.index("to") if "to" in lemmas else -1
+    if target_language_index != -1:
+        target_language = lemmas[target_language_index+1]
+        text_to_translate = " ".join(lemmas[translate_index+1:target_language_index])
+    else:
+        target_language = "en"
+    # Translate the text
+    translated_text = translate_text(text_to_translate, target_language=target_language)
+    return translated_text
 
 def get_day_info():
     now = datetime.datetime.now()
@@ -72,7 +92,13 @@ def load_responses():
     with open('src/responses.json') as f:
         responses = json.load(f)
     return responses
-    
+
+def tokenize_and_lemmatize(user_input):
+    tokens = word_tokenize(user_input)
+    lemmatizer = WordNetLemmatizer()
+    lemmas = [lemmatizer.lemmatize(token) for token in tokens]
+    return lemmas
+
 def chatbot():
     # Greeting message
     print(f"{config.BOT_NAME}: Hi, I'm a chatbot. What can I help you with today?")
@@ -82,11 +108,13 @@ def chatbot():
     while True:
         # User input
         user_input = input().lower()
-
-        # Tokenize and lemmatize the user's input
-        tokens = word_tokenize(user_input)
-        lemmatizer = WordNetLemmatizer()
-        lemmas = [lemmatizer.lemmatize(token) for token in tokens]
+        lemmas = tokenize_and_lemmatize(user_input)
+        
+        # Check if the user wants to translate text
+        if "translate" in lemmas:
+            translate_text_response = translate_text_from_input(lemmas)
+            print(f"{config.BOT_NAME}: {translate_text_response}")
+            continue
         
         # Check if the user wants help
         if 'help' in lemmas:
