@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-To use SimpleChatBot, simply run the main.py file in a Python environment or download the executable [Release](https://github.com/MafariT/SimpleChatBot/releases)
+To use SimpleChatBot, simply run the main.py file in a Python environment or download the executable [Releases](https://github.com/MafariT/SimpleChatBot/releases/latest)
 
 Here are some examples of things you can say to the chatbot:
 
