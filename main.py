@@ -78,12 +78,6 @@ def chatbot():
         lemmatizer = WordNetLemmatizer()
         lemmas = [lemmatizer.lemmatize(token) for token in tokens]
         
-        # Check if the user asked about the weather
-        if 'weather' in lemmas:
-            weather_response = get_weather_info()
-            print(f"Chatbot: {weather_response}")
-            continue
-        
         # Check if the user wants help
         if 'help' in lemmas:
             help_response = get_help_info()
@@ -96,11 +90,16 @@ def chatbot():
             print(f"Chabot: {day_response}")
             continue
 
-        
         # Check if the user wants to know the time
         if 'time' in lemmas:
             time_response = get_time_info()
             print(f"Chatbot: {time_response}")
+            continue
+        
+        # Check if the user asked about the weather
+        if 'weather' in lemmas:
+            weather_response = get_weather_info()
+            print(f"Chatbot: {weather_response}")
             continue
         
         # Check if the user wants to do math
@@ -127,7 +126,6 @@ def chatbot():
                 print(f"Chatbot: {response}")
                 break
         else:
-            # If no response has been given yet, provide a generic response
             # Sentiment analysis
             blob = TextBlob(user_input)
             sentiment = blob.sentiment.polarity
