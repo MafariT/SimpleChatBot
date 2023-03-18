@@ -13,10 +13,9 @@ You can install these packages using the following command:
 ```
 pip install -r requirements.txt
 ```
-
 ## Usage
 
-To use SimpleChatBot, download the executable from the [Releases](https://github.com/MafariT/SimpleChatBot/releases/latest) page and run it on your Windows machine. If you choose to run the executable, you do not need to install Python or any additional packages.
+To use SimpleChatBot, download the executable from the [Releases](https://github.com/MafariT/SimpleChatBot/releases/latest). If you choose to run the executable, you do not need to install Python or any additional packages.
 
 Here are some examples of things you can say to the chatbot:
 
