@@ -42,7 +42,7 @@ def load_responses():
 
 def chatbot():
     # Greeting message
-    print("Hi, I'm a chatbot. What can I help you with today?")
+    print(f"Chatbot: Hi, I'm a chatbot. What can I help you with today?")
 
     responses = load_responses()
 
@@ -58,20 +58,31 @@ def chatbot():
         # Check if the user asked about the weather
         if 'weather' in lemmas:
             weather_response = get_weather_info()
-            print(weather_response)
+            print(f"Chatbot: {weather_response}")
+            continue
+        
+        # Check if the user wants to do math
+        if 'math' in lemmas and len(lemmas) > 1:
+            expression = user_input.split('math ')[1]
+            try:
+                result = eval(expression)
+                response = f"The result of the calculation is {result}!"
+            except:
+                response = "Sorry, I couldn't perform that calculation."
+            print(f"Chatbot: {response}")
             continue
 
         # Exit condition
         if user_input == "bye":
             response = random.choice(responses["bye"])
-            print(response)
+            print(f"Chatbot: {response}")
             break
 
         # Checkfor a matching response
         for key in responses.keys():
             if any(lemma in key for lemma in lemmas):
                 response = random.choice(responses[key])
-                print(response)
+                print(f"Chatbot: {response}")
                 break
         else:
             # If no response has been given yet, provide a generic response
@@ -80,14 +91,14 @@ def chatbot():
             sentiment = blob.sentiment.polarity
             if sentiment > 0.5:
                 response = "That's great to hear!"
-                print(response)
+                print(f"Chatbot: {response}")
             elif sentiment < -0.5:
                 response = "I'm sorry to hear that."
-                print(response)
+                print(f"Chatbot: {response}")
             else:
                 # If sentiment is neutral, provide a generic response
                 response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
-                print(response)
+                print(f"Chatbot: {response}")
                 
 if __name__ == '__main__':
     chatbot()
