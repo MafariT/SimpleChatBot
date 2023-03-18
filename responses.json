@@ -3,6 +3,7 @@
 "name": ["My name is Chatbot.", "I'm Chatbot, nice to meet you.", "I go by the name Chatbot."],
 "who": ["I'm a chatbot created by Mafari."],
 "bye": ["Goodbye!", "See you later!", "Take care!"],
+"mafari": ["he cool"],
 "thanks": ["You're welcome!", "No problem!", "Anytime!"],
 "old": ["I don't have an age, I'm a chatbot!", "I'm ageless, I'm a chatbot!", "I don't age, I'm a chatbot!"]
 }
