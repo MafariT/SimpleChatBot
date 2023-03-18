@@ -1,0 +1,10 @@
+{
+    "commands": [
+        "- Ask about the weather",
+        "- Ask for the current time",
+        "- Ask for what day it is",
+        "- Translate text ('translate who are you to french)",
+        "- Do math ('math 1 + 1')",
+        "- Say 'bye' to exit the chatbot"
+    ]
+}
