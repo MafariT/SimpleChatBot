@@ -2,9 +2,13 @@ import random
 import geocoder
 import requests
 import json
+import nltk
 from textblob import TextBlob
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+
+nltk.download('punkt')
+nltk.download('wordnet')
 
 def get_weather_info():
     # Get the user's location using geolocation
