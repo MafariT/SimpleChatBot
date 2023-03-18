@@ -1,10 +1,13 @@
 {
     "commands": [
-        "- Ask about the weather",
-        "- Ask for the current time",
-        "- Ask for what day it is",
-        "- Translate text ('translate who are you to french)",
-        "- Do math ('math 1 + 1')",
-        "- Say 'bye' to exit the chatbot"
+        "- translate [text] to [language]: Translates the given text to the specified language",
+        "- math [expression]: Calculates the given mathematical expression",
+        "- day: Provides information on the current day",
+        "- time: Provides information on the current time",
+        "- weather: Provides weather information for the specified location",
+        "- bye: Exits the chatbot",
+        
+        "Additionally, each command has alternative phrasings that can be used to trigger the corresponding action",
+        "For example, instead of typing 'time', you can ask 'What time is it?' and the chatbot will provide the current time."
     ]
 }
