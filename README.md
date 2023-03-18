@@ -1,6 +1,6 @@
 ## Installation
 
-You need to have Python 3 installed on your computer. You can download Python from the official website: [Python](https://www.python.org/downloads/)
+If you want to run SimpleChatBot from the source code, you will need to have Python 3 installed on your computer. You can download Python from the official website: [Python](https://www.python.org/downloads/)
 
 You also need to install the following Python packages:
 - geocoder
@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-To use SimpleChatBot, simply run the main.py file in a Python environment or download the executable [Releases](https://github.com/MafariT/SimpleChatBot/releases/latest)
+To use SimpleChatBot, download the executable from the [Releases](https://github.com/MafariT/SimpleChatBot/releases/latest) page and run it on your Windows machine. If you choose to run the executable, you do not need to install Python or any additional packages.
 
 Here are some examples of things you can say to the chatbot:
 
