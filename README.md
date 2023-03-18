@@ -23,5 +23,6 @@ Here are some examples of things you can say to the chatbot:
 - "What's your name?"
 - "Who are you?"
 - "What's the weather like?"
+- "help" for more info about the bot commands
 
 You can exit the chatbot by typing "bye".
