@@ -16,7 +16,7 @@ logger = setup_logger('chatbot_logger', 'chatbot.log')
 nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
 
-def logger_info(response):
+def logger_info_bot(response):
     logger.info(f'Bot said: {response}')
 
 def get_help_info():
@@ -113,49 +113,49 @@ def chatbot():
         if "translate" in lemmas:
             translate_text_response = translate_text_from_input(lemmas)
             print(f"{config.BOT_NAME}: {translate_text_response}")
-            logger_info(translate_text_response)
+            logger_info_bot(translate_text_response)
             continue
         
         # Check if the user wants help
         if 'help' in lemmas:
             help_response = get_help_info()
             print(f"{config.BOT_NAME}: {help_response}")
-            logger_info(help_response)
+            logger_info_bot(help_response)
             continue
         
         # Check if the user wants to know the day
         if 'day' in lemmas:
             day_response = get_day_info()
             print(f"{config.BOT_NAME}: {day_response}")
-            logger_info(day_response)
+            logger_info_bot(day_response)
             continue
 
         # Check if the user wants to know the time
         if 'time' in lemmas:
             time_response = get_time_info()
             print(f"{config.BOT_NAME}: {time_response}")
-            logger_info(time_response)
+            logger_info_bot(time_response)
             continue
         
         # Check if the user asked about the weather
         if 'weather' in lemmas:
             weather_response = get_weather_info()
             print(f"{config.BOT_NAME}: {weather_response}")
-            logger_info(weather_response)
+            logger_info_bot(weather_response)
             continue
         
         # Check if the user wants to do math
         if 'math' in lemmas and len(lemmas) > 1:
             math_response = get_math_calc(user_input)
             print(f"{config.BOT_NAME}: {math_response}")
-            logger_info(math_response)
+            logger_info_bot(math_response)
             continue
 
         # Exit condition
         if 'bye' in lemmas:
             response = random.choice(responses["bye"])
             print(f"{config.BOT_NAME}: {response}")
-            logger_info(response)
+            logger_info_bot(response)
             break
 
         # Checkfor a matching response
@@ -163,7 +163,7 @@ def chatbot():
             if any(lemma in key for lemma in lemmas):
                 response = random.choice(responses[key])
                 print(f"{config.BOT_NAME}: {response}")
-                logger_info(response)
+                logger_info_bot(response)
                 break
         else:
             # Sentiment analysis
@@ -172,12 +172,12 @@ def chatbot():
             if sentiment > 0.5:
                 response = "That's great to hear!"
                 print(f"{config.BOT_NAME}: {response}")
-                logger_info(response)
+                logger_info_bot(response)
             elif sentiment < -0.5:
                 response = "I'm sorry to hear that."
                 print(f"{config.BOT_NAME}: {response}")
-                logger_info(response)
+                logger_info_bot(response)
             else:
                 response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
                 print(f"{config.BOT_NAME}: {response}")
-                logger_info(response)
+                logger_info_bot(response)
