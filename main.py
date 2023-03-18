@@ -1,6 +1,4 @@
-# Importing required libraries
 import random
-import time
 from textblob import TextBlob
 
 
@@ -41,9 +39,6 @@ def chatbot():
             response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
             print(response)
             
-        # Time delay
-        time.sleep(1)
-        
         # Sentiment analysis
         blob = TextBlob(user_input)
         sentiment = blob.sentiment.polarity
@@ -53,14 +48,6 @@ def chatbot():
         elif sentiment < -0.5:
             response = "I'm sorry to hear that."
             print(response)
-        
-        # Enable/disable text-to-speech
-        if user_input == "disable tts":
-            tts_enabled = False
-            print("Text-to-speech has been disabled.")
-        elif user_input == "enable tts":
-            tts_enabled = True
-            print("Text-to-speech has been enabled.")
-            
+                        
 # Calling the chatbot function
 chatbot()
