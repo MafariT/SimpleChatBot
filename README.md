@@ -1,8 +1,6 @@
 ## Installation
 
-If you want to run SimpleChatBot from the source code, you will need to have Python 3 installed on your computer. You can download Python from the official website: [Python](https://www.python.org/downloads/)
-
-You also need to install the following Python packages:
+You need to install the following Python packages:
 - geocoder
 - requests
 - textblob
