@@ -1,12 +1,11 @@
 import logging
 from logging.handlers import RotatingFileHandler
-from src.config import LOGGING_ENABLED
-from src.config import CONSOLE_LOGGING_ENABLED
+from src.config import LOGGING_ENABLED, CONSOLE_LOGGING_ENABLED
 
 def setup_logger(name, log_file, level=logging.DEBUG):
     if LOGGING_ENABLED:
         # Define the log formatter
-        formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s: %(message)s')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s -> %(message)s')
 
         # Define the file handler and set the formatter
         file_handler = RotatingFileHandler(log_file, maxBytes=1024*1024, backupCount=10)
