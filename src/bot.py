@@ -18,7 +18,7 @@ nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
 
 def logger_info_bot(response):
-    logger.info(f'Bot said: {response}')
+    logger.info(f'{BOT_NAME} said: {response}')
 
 def get_help_info():
     # Define the usable commands
