@@ -3,7 +3,7 @@ from src.config import LOGGING_ENABLED
 
 def setup_logger(name, log_file, level=logging.DEBUG):
     if LOGGING_ENABLED:
-        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+        formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s: %(message)s')
         handler = logging.FileHandler(log_file)
         handler.setFormatter(formatter)
 
@@ -14,6 +14,6 @@ def setup_logger(name, log_file, level=logging.DEBUG):
         class NullHandler(logging.Handler):
             def emit(self, record):
                 pass
-        logger = logging.getLogger(__name__)
+        logger = logging.getLogger(name)
         logger.addHandler(NullHandler())
     return logger
