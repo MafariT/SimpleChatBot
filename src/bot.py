@@ -22,7 +22,7 @@ def logger_info_bot(response):
 
 def get_help_info():
     # Define the usable commands
-    with open('src/commands.json', 'r') as f:
+    with open('src/data/commands.json', 'r') as f:
         commands = json.load(f)['commands']
     response = "Here are the things you can ask me:\n" + "\n".join(commands)
     return response
@@ -122,7 +122,7 @@ def get_math_calc(user_input):
     return response
 
 def load_responses():
-    with open('src/responses.json') as f:
+    with open('src/data/responses.json') as f:
         responses = json.load(f)
     return responses
 
