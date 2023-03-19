@@ -5,8 +5,7 @@ import json
 import nltk
 import datetime
 import ast
-from src.config import WEATHER_API_KEY
-from src.config import BOT_NAME
+from src.config import WEATHER_API_KEY, BOT_NAME
 from src.logger import setup_logger
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
@@ -14,7 +13,7 @@ from deep_translator import GoogleTranslator
 from textblob import TextBlob
 
 
-logger = setup_logger('chatbot_logger', 'chatbot.log')
+logger = setup_logger('chatbot', 'chatbot.log')
 nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
 
