@@ -61,24 +61,28 @@ def get_time_info():
     return response
 
 def get_weather_info():
-    # Get the user's location using geolocation
-    g = geocoder.ip('me')
-    lat, lon = g.latlng
+    try:
+        # Get the user's location using geolocation
+        g = geocoder.ip('me')
+        lat, lon = g.latlng
 
-    api_key = WEATHER_API_KEY
-    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
-    response = requests.get(url)
+        api_key = WEATHER_API_KEY
+        url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
+        response = requests.get(url)
 
-    if response.status_code == 200:
-        data = response.json()
-        temperature = data['main']['temp']
-        humidity = data['main']['humidity']
-        description = data['weather'][0]['description']
+        if response.status_code == 200:
+            data = response.json()
+            temperature = data['main']['temp']
+            humidity = data['main']['humidity']
+            description = data['weather'][0]['description']
 
-        # Format the weather information into a response
-        response = f"The current temperature is {temperature} degrees Celsius with {humidity}% humidity. The weather is {description}."
-    else:
-        response = "Sorry, I couldn't retrieve the weather information at this time."
+            # Format the weather information into a response
+            response = f"The current temperature is {temperature} degrees Celsius with {humidity}% humidity. The weather is {description}."
+        else:
+            response = "Sorry, I couldn't retrieve the weather information at this time."
+    except Exception as e:
+        logger.error(f"An error occurred while retrieving the weather information: {str(e)}", exc_info=True)
+        response = f"An error occurred while retrieving the weather information. Please check the log file for more information on the error."
 
     return response
 
