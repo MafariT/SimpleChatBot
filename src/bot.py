@@ -153,42 +153,42 @@ def chatbot():
             continue
         
         # Check if the user wants help
-        if 'help' in lemmas:
+        elif 'help' in lemmas:
             help_response = get_help_info()
             print(f"{BOT_NAME}: {help_response}")
             logger_info_bot(help_response)
             continue
         
         # Check if the user wants to know the day
-        if 'day' in lemmas:
+        elif 'day' in lemmas:
             day_response = get_day_info()
             print(f"{BOT_NAME}: {day_response}")
             logger_info_bot(day_response)
             continue
 
         # Check if the user wants to know the time
-        if 'time' in lemmas:
+        elif 'time' in lemmas:
             time_response = get_time_info()
             print(f"{BOT_NAME}: {time_response}")
             logger_info_bot(time_response)
             continue
         
         # Check if the user asked about the weather
-        if 'weather' in lemmas:
+        elif 'weather' in lemmas:
             weather_response = get_weather_info()
             print(f"{BOT_NAME}: {weather_response}")
             logger_info_bot(weather_response)
             continue
         
         # Check if the user wants to do math
-        if 'math' in lemmas and len(lemmas) > 1:
+        elif 'math' in lemmas and len(lemmas) > 1:
             math_response = get_math_calc(user_input)
             print(f"{BOT_NAME}: {math_response}")
             logger_info_bot(math_response)
             continue
 
         # Check if the user wants to quit
-        if 'bye' in lemmas:
+        elif 'bye' in lemmas:
             response = random.choice(responses["bye"])
             print(f"{BOT_NAME}: {response}")
             logger_info_bot(response)
