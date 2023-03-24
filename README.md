@@ -1,3 +1,4 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/mafarit/simplechatbot/badge)](https://www.codefactor.io/repository/github/mafarit/simplechatbot)
 ## Installation
 
 You need to install the following Python packages:
