@@ -17,8 +17,10 @@ logger = setup_logger('chatbot', 'chatbot.log')
 nltk.download('punkt', quiet=True)
 nltk.download('wordnet', quiet=True)
 
+
 def logger_info_bot(response):
     logger.info(f'{BOT_NAME} said: {response}')
+
 
 def get_help_info():
     # Define the usable commands
@@ -27,9 +29,11 @@ def get_help_info():
     response = "Here are the things you can ask me:\n" + "\n".join(commands)
     return response
 
+
 def translate_text(text, target_language):
     translated_text = GoogleTranslator(source='auto', target=target_language).translate(text)
     return translated_text
+
 
 def translate_text_from_input(lemmas):
     try:
@@ -48,16 +52,19 @@ def translate_text_from_input(lemmas):
         logger.error(f"Error occurred while translating text: {text_to_translate}", exc_info=True)
         translated_text = f"An error occurred while translating the text: '{text_to_translate}'. Please check the log file for more information on the error."
     return translated_text
-    
+
+
 def get_day_info():
     now = datetime.datetime.now()
     response = f"Today is {now.strftime('%A, %B %d, %Y')}."
     return response
 
+
 def get_time_info():
     now = datetime.datetime.now()
     response = f"The current time is {now.strftime('%I:%M %p')}"
     return response
+
 
 def get_weather_info():
     try:
@@ -84,6 +91,7 @@ def get_weather_info():
         response = f"An error occurred while retrieving the weather information. Please check the log file for more information on the error."
 
     return response
+
 
 def get_math_calc(user_input):
     def evaluate_expression(node):
@@ -121,16 +129,19 @@ def get_math_calc(user_input):
         response = "Sorry, I couldn't perform that calculation. Please check the log file for more information on the error."
     return response
 
+
 def load_responses():
     with open('src/data/responses.json') as f:
         responses = json.load(f)
     return responses
+
 
 def tokenize_and_lemmatize(user_input):
     tokens = word_tokenize(user_input)
     lemmatizer = WordNetLemmatizer()
     lemmas = [lemmatizer.lemmatize(token) for token in tokens]
     return lemmas
+
 
 def chatbot():
     logger.info('Greeting message displayed')
@@ -143,39 +154,51 @@ def chatbot():
         lemmas = tokenize_and_lemmatize(user_input)
         logger.info(f'User said: {user_input}')
         
-        response = None
-
-        if "translate" in lemmas:
-            response = translate_text_from_input(lemmas)
-        elif 'help' in lemmas:
-            response = get_help_info()
-        elif 'day' in lemmas:
-            response = get_day_info()
-        elif 'time' in lemmas:
-            response = get_time_info()
-        elif 'weather' in lemmas:
-            response = get_weather_info()
-        elif 'math' in lemmas and len(lemmas) > 1:
-            response = get_math_calc(user_input)
-        elif 'bye' in lemmas:
-            response = random.choice(responses["bye"])
-            logger_info_bot(response)
-            break
-        else:
-            for key in responses.keys():
-                if any(lemma in key for lemma in lemmas):
-                    response = random.choice(responses[key])
-                    break
-
-        if response is None:
-            blob = TextBlob(user_input)
-            sentiment = blob.sentiment.polarity
-            if sentiment > 0.5:
-                response = "That's great to hear!"
-            elif sentiment < -0.5:
-                response = "I'm sorry to hear that."
-            else:
-                response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
+        response = get_response(user_input, lemmas, responses)
 
         print(f"{BOT_NAME}: {response}")
         logger_info_bot(response)
+        
+        if response == responses["bye"][0]:
+            logger.info(f'Exiting chatbot')
+            break
+
+
+def get_response(user_input, lemmas, responses):
+    if "translate" in lemmas:
+        response = translate_text_from_input(lemmas)
+    elif 'help' in lemmas:
+        response = get_help_info()
+    elif 'day' in lemmas:
+        response = get_day_info()
+    elif 'time' in lemmas:
+        response = get_time_info()
+    elif 'weather' in lemmas:
+        response = get_weather_info()
+    elif 'math' in lemmas and len(lemmas) > 1:
+        response = get_math_calc(user_input)
+    elif 'bye' in lemmas:
+        response = random.choice(responses["bye"])
+    else:
+        response = get_default_response(user_input, lemmas, responses)
+
+    return response
+
+
+def get_default_response(user_input, lemmas, responses):
+    for key in responses.keys():
+        if any(lemma in key for lemma in lemmas):
+            return random.choice(responses[key])
+
+    return get_sentiment_response(user_input)
+
+
+def get_sentiment_response(user_input):
+    blob = TextBlob(user_input)
+    sentiment = blob.sentiment.polarity
+    if sentiment > 0.5:
+        return "That's great to hear!"
+    elif sentiment < -0.5:
+        return "I'm sorry to hear that."
+    else:
+        return random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
