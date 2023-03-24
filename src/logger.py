@@ -2,37 +2,30 @@ import logging
 from logging.handlers import RotatingFileHandler
 from src.config import LOGGING_ENABLED, CONSOLE_LOGGING_ENABLED
 
+
 def setup_logger(name, log_file, level=logging.DEBUG):
-    if LOGGING_ENABLED:
-        # Define the log formatter
-        formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s -> %(message)s')
+    logger = logging.getLogger(name)
 
-        # Define the file handler and set the formatter
-        file_handler = RotatingFileHandler(log_file, maxBytes=1024*1024, backupCount=10)
-        file_handler.setFormatter(formatter)
-        
-        # Define the console handler and set the formatter
-        if CONSOLE_LOGGING_ENABLED:
-            logger = logging.getLogger(name)
-            console_handler = logging.StreamHandler()
-            console_handler.setFormatter(formatter)
-            logger.addHandler(console_handler)  
+    if not LOGGING_ENABLED:
+        logger.addHandler(logging.NullHandler())
+        return logger
 
-        # Define the logger and set the level and handlers
-        logger = logging.getLogger(name)
-        logger.setLevel(level)
-        logger.addHandler(file_handler)
+    formatter = logging.Formatter(
+        '%(asctime)s %(levelname)s %(name)s -> %(message)s')
 
-        # Define custom log levels
-        logging.addLevelName(15, "VERBOSE")
-        logging.VERBOSE = 15
-        logger.setLevel(logging.VERBOSE)
+    file_handler = RotatingFileHandler(
+        log_file,
+        maxBytes=1024 * 1024,
+        backupCount=10)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
 
-    else:
-        class NullHandler(logging.Handler):
-            def emit(self, record):
-                pass
-        logger = logging.getLogger(name)
-        logger.addHandler(NullHandler())
+    if CONSOLE_LOGGING_ENABLED:
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
+
+    logging.addLevelName(15, "VERBOSE")
+    logger.setLevel(logging.VERBOSE if level == 15 else level)
 
     return logger

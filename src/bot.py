@@ -134,86 +134,48 @@ def tokenize_and_lemmatize(user_input):
 
 def chatbot():
     logger.info('Greeting message displayed')
-    # Greeting message
     print(f"{BOT_NAME}: Hi, I'm a chatbot. What can I help you with today?")
 
     responses = load_responses()
 
     while True:
-        # User input
         user_input = input().lower()
         lemmas = tokenize_and_lemmatize(user_input)
         logger.info(f'User said: {user_input}')
         
-        # Check if the user wants to translate text
+        response = None
+
         if "translate" in lemmas:
-            translate_text_response = translate_text_from_input(lemmas)
-            print(f"{BOT_NAME}: {translate_text_response}")
-            logger_info_bot(translate_text_response)
-            continue
-        
-        # Check if the user wants help
+            response = translate_text_from_input(lemmas)
         elif 'help' in lemmas:
-            help_response = get_help_info()
-            print(f"{BOT_NAME}: {help_response}")
-            logger_info_bot(help_response)
-            continue
-        
-        # Check if the user wants to know the day
+            response = get_help_info()
         elif 'day' in lemmas:
-            day_response = get_day_info()
-            print(f"{BOT_NAME}: {day_response}")
-            logger_info_bot(day_response)
-            continue
-
-        # Check if the user wants to know the time
+            response = get_day_info()
         elif 'time' in lemmas:
-            time_response = get_time_info()
-            print(f"{BOT_NAME}: {time_response}")
-            logger_info_bot(time_response)
-            continue
-        
-        # Check if the user asked about the weather
+            response = get_time_info()
         elif 'weather' in lemmas:
-            weather_response = get_weather_info()
-            print(f"{BOT_NAME}: {weather_response}")
-            logger_info_bot(weather_response)
-            continue
-        
-        # Check if the user wants to do math
+            response = get_weather_info()
         elif 'math' in lemmas and len(lemmas) > 1:
-            math_response = get_math_calc(user_input)
-            print(f"{BOT_NAME}: {math_response}")
-            logger_info_bot(math_response)
-            continue
-
-        # Check if the user wants to quit
+            response = get_math_calc(user_input)
         elif 'bye' in lemmas:
             response = random.choice(responses["bye"])
-            print(f"{BOT_NAME}: {response}")
             logger_info_bot(response)
             break
-
-        # Check for a matching response
-        for key in responses.keys():
-            if any(lemma in key for lemma in lemmas):
-                response = random.choice(responses[key])
-                print(f"{BOT_NAME}: {response}")
-                logger_info_bot(response)
-                break
         else:
-            # Sentiment analysis
+            for key in responses.keys():
+                if any(lemma in key for lemma in lemmas):
+                    response = random.choice(responses[key])
+                    break
+
+        if response is None:
             blob = TextBlob(user_input)
             sentiment = blob.sentiment.polarity
             if sentiment > 0.5:
                 response = "That's great to hear!"
-                print(f"{BOT_NAME}: {response}")
-                logger_info_bot(response)
             elif sentiment < -0.5:
                 response = "I'm sorry to hear that."
-                print(f"{BOT_NAME}: {response}")
-                logger_info_bot(response)
             else:
                 response = random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
-                print(f"{BOT_NAME}: {response}")
-                logger_info_bot(response)
+
+        print(f"{BOT_NAME}: {response}")
+        logger_info_bot(response)
