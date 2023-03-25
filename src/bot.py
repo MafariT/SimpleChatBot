@@ -159,7 +159,7 @@ def chatbot():
         print(f"{BOT_NAME}: {response}")
         logger_info_bot(response)
         
-        if response == responses["bye"][0]:
+        if "bye" in lemmas:
             logger.info(f'Exiting chatbot')
             break
 
