@@ -1,0 +1,78 @@
+{
+    "hello": [
+        "Hi there!",
+        "Hello!",
+        "Greetings!",
+        "Hello, how can I assist you?",
+        "How's it going?",
+        "Nice to meet you!"
+    ],
+    "hi": [
+        "Hi there!",
+        "Hello!",
+        "Greetings!",
+        "Hello, how can I assist you?",
+        "How's it going?",
+        "Nice to meet you!"
+    ],
+    "hey": [
+        "Hi there!",
+        "Hello!",
+        "Greetings!",
+        "Hello, how can I assist you?",
+        "How's it going?",
+        "Nice to meet you!"
+    ],
+    "name": [
+        "My name is Chatbot.",
+        "I'm Chatbot, nice to meet you.",
+        "I go by the name Chatbot."
+    ],
+    "mafari": [
+        "He's a cool guy",
+        "I don't know much about Mafari, but I do know that he created me!",
+        "Mafari is the creator of this chatbot, and he's always working on new and exciting projects!"
+    ],
+    "who": [
+        "I'm a chatbot created by Mafari."
+    ],
+    "bye": [
+        "Goodbye!",
+        "See you later!",
+        "Take care!"
+    ],
+    "thanks": [
+        "You're welcome!",
+        "No problem!",
+        "Anytime!"
+    ],
+    "old": [
+        "I don't have an age, I'm a chatbot!",
+        "I'm ageless, I'm a chatbot!",
+        "I don't age, I'm a chatbot!"
+    ],
+    "how": [
+        "I'm doing well, thanks for asking!",
+        "I'm a chatbot, so I don't have feelings, but I'm here to help you!",
+        "I'm functioning normally, thank you for asking!"
+    ],
+    "up": [
+        "Not much, just here to chat with you!",
+        "Just hanging out, waiting for your next question!",
+        "Nothing much, what's up with you?"
+    ],
+    "color": [
+        "I'm a chatbot, so I don't have a favorite color!",
+        "I don't have eyes, so I don't really have a concept of color!",
+        "I like all colors equally!"
+    ],
+    "from": [
+        "I was created by Mafari, so you could say I'm from wherever he's from!",
+        "I don't really have a physical location, since I'm a chatbot!"
+    ],
+    "like": [
+        "I like chatting with people and helping them out with their questions!",
+        "I don't really have personal preferences, since I'm a chatbot programmed to assist you!",
+        "I enjoy being useful and providing helpful responses!"
+    ]
+}

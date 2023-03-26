@@ -2,7 +2,7 @@ import threading
 import nltk
 import tkinter as tk
 from tkinter import ttk
-from src.bot import chatbot
+from src.bot import chatbot, load_default_responses, load_excluded_words
 from src.config import BOT_NAME
 
 
