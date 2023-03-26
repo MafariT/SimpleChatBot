@@ -162,7 +162,7 @@ def get_response(user_input, lemmas, responses):
 
 
 def get_default_response(user_input, lemmas, responses):
-    if len(user_input) <= 5 and user_input.lower() and user_input.lower() not in excluded_words:
+    if len(user_input) <= 5 and user_input.lower() not in excluded_words:
         return random.choice(default_responses)
 
     for key in responses.keys():
