@@ -143,25 +143,12 @@ def tokenize_and_lemmatize(user_input):
     return lemmas
 
 
-def chatbot():
-    logger.info('Greeting message displayed')
-    print(f"{BOT_NAME}: Hi, I'm a chatbot. What can I help you with today?")
-
+def chatbot(user_input):
     responses = load_responses()
-
-    while True:
-        user_input = input().lower()
-        lemmas = tokenize_and_lemmatize(user_input)
-        logger.info(f'User said: {user_input}')
-        
-        response = get_response(user_input, lemmas, responses)
-
-        print(f"{BOT_NAME}: {response}")
-        logger_info_bot(response)
-        
-        if "bye" in lemmas:
-            logger.info(f'Exiting chatbot')
-            break
+    lemmas = tokenize_and_lemmatize(user_input)
+    response = get_response(user_input, lemmas, responses)
+    logger_info_bot(response)
+    return response
 
 
 def get_response(user_input, lemmas, responses):
