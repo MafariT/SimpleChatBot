@@ -148,6 +148,7 @@ def chatbot(user_input):
     lemmas = tokenize_and_lemmatize(user_input)
     response = get_response(user_input, lemmas, responses)
     logger_info_bot(response)
+    
     return response
 
 
