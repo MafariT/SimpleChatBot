@@ -1,4 +1,5 @@
 import json
+import threading
 
 def load_responses():
     with open('src/data/chat_data.json') as f:
@@ -28,3 +29,29 @@ def load_bad_sentiment_responses():
     with open('src/data/chat_data.json') as f:
         bad_sentiment_responses = json.load(f)['bad_sentiment_responses']
     return bad_sentiment_responses
+
+responses_thread = threading.Thread(target=load_responses)
+default_responses_thread = threading.Thread(target=load_default_responses)
+excluded_words_thread = threading.Thread(target=load_excluded_words)
+good_sentiment_responses_thread = threading.Thread(target=load_good_sentiment_responses)
+bad_sentiment_responses_thread = threading.Thread(target=load_bad_sentiment_responses)
+
+# start all threads
+responses_thread.start()
+default_responses_thread.start()
+excluded_words_thread.start()
+good_sentiment_responses_thread.start()
+bad_sentiment_responses_thread.start()
+
+# wait for all threads to finish
+responses_thread.join()
+default_responses_thread.join()
+excluded_words_thread.join()
+good_sentiment_responses_thread.join()
+bad_sentiment_responses_thread.join()
+
+responses = load_responses()
+default_responses = load_default_responses()
+excluded_words = load_excluded_words()
+good_sentiment_responses = load_good_sentiment_responses()
+bad_sentiment_responses = load_bad_sentiment_responses()

@@ -14,11 +14,6 @@ from textblob import TextBlob
 
 
 logger = setup_logger('chatbot', 'chatbot.log')
-responses = load_responses()
-default_responses = load_default_responses()
-excluded_words = load_excluded_words()
-good_sentiment_responses = load_good_sentiment_responses()
-bad_sentiment_responses = load_bad_sentiment_responses()
 
 
 def logger_info_bot(response):
