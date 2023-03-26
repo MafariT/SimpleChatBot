@@ -35,7 +35,7 @@ def translate_text_from_input(lemmas):
         # Get the text to translate and the target language
         translate_index = lemmas.index("translate")
         text_to_translate = " ".join(lemmas[translate_index+1:])
-        target_language_index = lemmas.index("to") if "to" in lemmas else -1
+        target_language_index = len(lemmas) - lemmas[::-1].index("to") - 1 if "to" in lemmas else -1
         if target_language_index != -1:
             target_language = lemmas[target_language_index+1]
             text_to_translate = " ".join(lemmas[translate_index+1:target_language_index])
@@ -47,6 +47,7 @@ def translate_text_from_input(lemmas):
         logger.error(f"Error occurred while translating text: {text_to_translate}", exc_info=True)
         translated_text = f"An error occurred while translating the text: '{text_to_translate}'. Please check the log file for more information on the error."
     return translated_text
+
 
 
 def get_day_info():
@@ -130,6 +131,7 @@ def tokenize_and_lemmatize(user_input):
     lemmatizer = WordNetLemmatizer()
     lemmas = [lemmatizer.lemmatize(token) for token in tokens]
     return lemmas
+
 
 def chatbot(user_input):
     lemmas = tokenize_and_lemmatize(user_input)
