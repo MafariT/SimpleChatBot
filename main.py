@@ -1,3 +1,4 @@
+import webbrowser
 from flask import Flask, render_template, request
 import logging
 from src import bot 
@@ -18,4 +19,5 @@ def get_bot_response():
     return response
 
 if __name__ == "__main__":
-    app.run()
+    webbrowser.open_new('http://localhost:5000')
+    app.run(port=5000, debug=True, use_reloader=False, host='0.0.0.0', threaded=True, processes=1)
