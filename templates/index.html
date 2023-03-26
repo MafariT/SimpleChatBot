@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chatbot Example</title>
+</head>
+
+<body>
+    <h1>Chatbot Example</h1>
+    <div id="chatbot">
+        <p>Chat with our chatbot:</p>
+        <div id="chat-container"></div>
+        <input id="user-input" type="text" placeholder="Type here...">
+        <button id="send-button" onclick="sendUserInput()">Send</button>
+    </div>
+    <script>
+        function sendUserInput() {
+            var userInput = document.getElementById("user-input").value;
+            var chatContainer = document.getElementById("chat-container");
+            var newMessage = document.createElement("p");
+            newMessage.innerHTML = "<strong>You:</strong> " + userInput;
+            chatContainer.appendChild(newMessage);
+            document.getElementById("user-input").value = "";
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var newMessage = document.createElement("p");
+                    newMessage.innerHTML = "<strong>Chatbot:</strong> " + this.responseText;
+                    chatContainer.appendChild(newMessage);
+                }
+            };
+            xhttp.open("GET", "/get?msg=" + userInput, true);
+            xhttp.send();
+        }
+    </script>
+</body>
+
+</html>
