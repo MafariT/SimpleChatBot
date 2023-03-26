@@ -1,0 +1,120 @@
+{
+    "responses": {
+        "hello": [
+            "Hi there!",
+            "Hello!",
+            "Greetings!",
+            "Hello, how can I assist you?",
+            "How's it going?",
+            "Nice to meet you!"
+        ],
+        "hi": [
+            "Hi there!",
+            "Hello!",
+            "Greetings!",
+            "Hello, how can I assist you?",
+            "How's it going?",
+            "Nice to meet you!"
+        ],
+        "hey": [
+            "Hi there!",
+            "Hello!",
+            "Greetings!",
+            "Hello, how can I assist you?",
+            "How's it going?",
+            "Nice to meet you!"
+        ],
+        "name": [
+            "My name is Chatbot.",
+            "I'm Chatbot, nice to meet you.",
+            "I go by the name Chatbot."
+        ],
+        "mafari": [
+            "He's a cool guy",
+            "I don't know much about Mafari, but I do know that he created me!",
+            "Mafari is the creator of this chatbot, and he's always working on new and exciting projects!"
+        ],
+        "who": [
+            "I'm a chatbot created by Mafari."
+        ],
+        "bye": [
+            "Goodbye!",
+            "See you later!",
+            "Take care!"
+        ],
+        "thanks": [
+            "You're welcome!",
+            "No problem!",
+            "Anytime!"
+        ],
+        "old": [
+            "I don't have an age, I'm a chatbot!",
+            "I'm ageless, I'm a chatbot!",
+            "I don't age, I'm a chatbot!"
+        ],
+        "how": [
+            "I'm doing well, thanks for asking!",
+            "I'm a chatbot, so I don't have feelings, but I'm here to help you!",
+            "I'm functioning normally, thank you for asking!"
+        ],
+        "up": [
+            "Not much, just here to chat with you!",
+            "Just hanging out, waiting for your next question!",
+            "Nothing much, what's up with you?"
+        ],
+        "color": [
+            "I'm a chatbot, so I don't have a favorite color!",
+            "I don't have eyes, so I don't really have a concept of color!",
+            "I like all colors equally!"
+        ],
+        "from": [
+            "I was created by Mafari, so you could say I'm from wherever he's from!",
+            "I don't really have a physical location, since I'm a chatbot!"
+        ],
+        "like": [
+            "I like chatting with people and helping them out with their questions!",
+            "I don't really have personal preferences, since I'm a chatbot programmed to assist you!",
+            "I enjoy being useful and providing helpful responses!"
+        ]
+    },
+    "default_responses": [
+        "Could you repeat the question?",
+        "I'm not sure how to respond to that.",
+        "Perhaps you could try rephrasing your question?",
+        "I'm sorry, I didn't understand that.",
+        "Could you please rephrase that?",
+        "I'm not sure what you mean.",
+        "I'm sorry, I'm not programmed to answer that."
+    ],
+    "good_sentiment_responses": [
+        "I'm so happy for you!",
+        "Congratulations!",
+        "That's amazing!",
+        "Awesome!",
+        "Great to hear it!",
+        "That's fantastic!"
+    ],
+    "bad_sentiment_responses": [
+        "I'm sorry to hear that.",
+        "That sounds difficult. How can I help?",
+        "I understand it can be frustrating. Let's see what we can do.",
+        "I'm here to listen. What's going on?",
+        "I'm sorry you're feeling that way. Is there anything I can do to help?"
+    ],
+    "commands": [
+        "- help: displays a list of available commands and their descriptions",
+        "- translate [text] to [language]: Translates the given text to the specified language",
+        "- math [expression]: Calculates the given mathematical expression",
+        "- day: Provides information on the current day",
+        "- time: Provides information on the current time",
+        "- weather: Provides weather information for the specified location",
+        "Additionally, each command has alternative phrasings that can be used to trigger the corresponding action",
+        "For example, instead of typing 'time', you can ask 'What time is it?' and the chatbot will provide the current time."
+    ],
+    "excluded_words": [
+        "hi",
+        "hello",
+        "hey",
+        "bye"
+    ]
+}
