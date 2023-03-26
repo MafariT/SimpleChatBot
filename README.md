@@ -24,7 +24,6 @@ Here are some examples of things you can say to the chatbot:
 - day: Provides information on the current day
 - time: Provides information on the current time
 - weather: Provides weather information for the specified location
-- bye: Exits the chatbot
 
         
 Additionally, each command has alternative phrasings that can be used to trigger the corresponding action
