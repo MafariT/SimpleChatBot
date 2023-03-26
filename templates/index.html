@@ -3,16 +3,12 @@
 
 <head>
     <title>SimpleChatBot</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f5f5f5;
         }
 
         .chatbot-container {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
             background-color: #fff;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
@@ -83,32 +79,52 @@
     </div>
     
     <script>
+        // Select DOM elements
+        const userInput = document.getElementById("user-input");
+        const sendButton = document.getElementById("send-button");
+        const chatContainer = document.getElementById("chat-container");
+
+        // Add event listeners
+        userInput.addEventListener("keydown", handleKeyDown);
+        sendButton.addEventListener("click", sendUserInput);
+
         function handleKeyDown(event) {
             if (event.key === "Enter") {
                 event.preventDefault();
-                document.getElementById("send-button").click();
+                sendButton.click();
             }
         }
+
         function sendUserInput() {
-            var userInput = document.getElementById("user-input").value;
-            var chatContainer = document.getElementById("chat-container");
-            var newMessage = document.createElement("div");
-            newMessage.classList.add("chat-message", "user");
-            newMessage.innerHTML = "<strong>You:</strong> " + userInput;
-            chatContainer.appendChild(newMessage);
-            document.getElementById("user-input").value = "";
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    var newMessage = document.createElement("div");
-                    newMessage.classList.add("chat-message", "bot");
-                    newMessage.innerHTML = "<strong>Chatbot:</strong> " + this.responseText;
-                    chatContainer.appendChild(newMessage);
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            // Create a new user message
+            const userMessage = createMessageElement(message, "user");
+            chatContainer.appendChild(userMessage);
+
+            // Clear the input field
+            userInput.value = "";
+
+            // Send the message to the server and handle the response
+            fetch(`/get?msg=${message}`)
+                .then(response => response.text())
+                .then(data => {
+                    // Create a new bot message
+                    const botMessage = createMessageElement(data, "bot");
+                    chatContainer.appendChild(botMessage);
+
+                    // Scroll to the bottom of the chat container
                     chatContainer.scrollTop = chatContainer.scrollHeight;
-                }
-            };
-            xhttp.open("GET", "/get?msg=" + userInput, true);
-            xhttp.send();
+                })
+                .catch(error => console.error(error));
+        }
+
+        function createMessageElement(message, sender) {
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("chat-message", sender);
+            messageElement.innerHTML = `<strong>${sender === "user" ? "You" : "Chatbot"}:</strong> ${message}`;
+            return messageElement;
         }
     </script>
 </body>
