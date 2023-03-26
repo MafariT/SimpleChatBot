@@ -6,14 +6,11 @@ import datetime
 import ast
 from src.data_loader import *
 from src.config import WEATHER_API_KEY, BOT_NAME
-from src.logger import setup_logger
+from src.logger import logger
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from deep_translator import GoogleTranslator
 from textblob import TextBlob
-
-
-logger = setup_logger('chatbot', 'chatbot.log')
 
 
 def logger_info_bot(response):

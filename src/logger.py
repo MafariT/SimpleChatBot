@@ -30,3 +30,5 @@ def setup_logger(name, log_file, level=logging.DEBUG):
     logger.setLevel(logging.VERBOSE if level == 15 else level)
 
     return logger
+
+logger = setup_logger('chatbot', 'chatbot.log')
