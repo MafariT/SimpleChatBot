@@ -1,8 +1,14 @@
+import threading
+import nltk
 import tkinter as tk
 from tkinter import ttk
-
 from src.bot import chatbot
 from src.config import BOT_NAME
+
+
+def download_nltk_data():
+    nltk.download('punkt', quiet=True)
+    nltk.download('wordnet', quiet=True)
 
 
 class ChatbotUI(ttk.Frame):
@@ -52,15 +58,20 @@ class ChatbotUI(ttk.Frame):
         self.chatbox.insert(tk.END, "You: ", "user")
         self.chatbox.insert(tk.END, f"{message}\n")
 
+        # Start a new thread to handle the chatbot logic
+        threading.Thread(target=self.handle_chatbot_response, args=(message,), daemon=True).start()
+
+    def handle_chatbot_response(self, message):
         # Add bot response with different font color and style
         response = chatbot(message)
+        self.chatbox.config(state="normal")
         self.chatbox.insert(tk.END, f"{BOT_NAME}: ", "bot")
         self.chatbox.insert(tk.END, f"{response}\n")
-
         self.chatbox.config(state="disabled")
         self.chatbox.see(tk.END)
 
     def run(self):
+        threading.Thread(target=download_nltk_data).start()
         self.master.mainloop()
 
 

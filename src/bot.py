@@ -2,7 +2,6 @@ import random
 import geocoder
 import requests
 import json
-import nltk
 import datetime
 import ast
 from src.config import WEATHER_API_KEY, BOT_NAME
@@ -14,8 +13,6 @@ from textblob import TextBlob
 
 
 logger = setup_logger('chatbot', 'chatbot.log')
-nltk.download('punkt', quiet=True)
-nltk.download('wordnet', quiet=True)
 
 
 def logger_info_bot(response):
