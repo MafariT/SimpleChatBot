@@ -36,14 +36,12 @@ excluded_words_thread = threading.Thread(target=load_excluded_words)
 good_sentiment_responses_thread = threading.Thread(target=load_good_sentiment_responses)
 bad_sentiment_responses_thread = threading.Thread(target=load_bad_sentiment_responses)
 
-# start all threads
 responses_thread.start()
 default_responses_thread.start()
 excluded_words_thread.start()
 good_sentiment_responses_thread.start()
 bad_sentiment_responses_thread.start()
 
-# wait for all threads to finish
 responses_thread.join()
 default_responses_thread.join()
 excluded_words_thread.join()
