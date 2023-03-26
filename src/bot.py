@@ -4,6 +4,7 @@ import requests
 import json
 import datetime
 import ast
+import threading
 from src.config import WEATHER_API_KEY, BOT_NAME
 from src.logger import setup_logger
 from nltk.tokenize import word_tokenize
@@ -21,7 +22,7 @@ def logger_info_bot(response):
 
 def get_help_info():
     # Define the usable commands
-    with open('src/data/commands.json', 'r') as f:
+    with open('src/data/chat_data.json', 'r') as f:
         commands = json.load(f)['commands']
     response = "Here are the things you can ask me:\n" + "\n".join(commands)
     return response
@@ -127,17 +128,41 @@ def get_math_calc(user_input):
     return response
 
 
-def load_responses():
-    with open('src/data/responses.json') as f:
-        responses = json.load(f)
-    return responses
-
-
 def tokenize_and_lemmatize(user_input):
     tokens = word_tokenize(user_input)
     lemmatizer = WordNetLemmatizer()
     lemmas = [lemmatizer.lemmatize(token) for token in tokens]
     return lemmas
+
+
+def load_responses():
+    with open('src/data/chat_data.json') as f:
+        responses = json.load(f)['responses']
+    return responses
+
+
+def load_default_responses():
+    with open('src/data/chat_data.json') as f:
+        default_responses = json.load(f)['default_responses']
+    return default_responses
+
+
+def load_excluded_words():
+    with open('src/data/chat_data.json') as f:
+        excluded_words = json.load(f)['excluded_words']
+    return excluded_words
+
+
+def load_good_sentiment_responses():
+    with open('src/data/chat_data.json') as f:
+        good_sentiment_responses = json.load(f)['good_sentiment_responses']
+    return good_sentiment_responses
+
+
+def load_bad_sentiment_responses():
+    with open('src/data/chat_data.json') as f:
+        bad_sentiment_responses = json.load(f)['bad_sentiment_responses']
+    return bad_sentiment_responses
 
 
 def chatbot(user_input):
@@ -162,8 +187,6 @@ def get_response(user_input, lemmas, responses):
         response = get_weather_info()
     elif 'math' in lemmas and len(lemmas) > 1:
         response = get_math_calc(user_input)
-    elif 'bye' in lemmas:
-        response = random.choice(responses["bye"])
     else:
         response = get_default_response(user_input, lemmas, responses)
 
@@ -171,6 +194,9 @@ def get_response(user_input, lemmas, responses):
 
 
 def get_default_response(user_input, lemmas, responses):
+    if len(user_input) <= 5 and user_input.lower() and user_input.lower() not in load_excluded_words():
+        return random.choice(load_default_responses())
+
     for key in responses.keys():
         if any(lemma in key for lemma in lemmas):
             return random.choice(responses[key])
@@ -182,8 +208,8 @@ def get_sentiment_response(user_input):
     blob = TextBlob(user_input)
     sentiment = blob.sentiment.polarity
     if sentiment > 0.5:
-        return "That's great to hear!"
+        return random.choice(load_good_sentiment_responses())
     elif sentiment < -0.5:
-        return "I'm sorry to hear that."
+        return random.choice(load_bad_sentiment_responses())
     else:
-        return random.choice(["I'm sorry, I didn't understand that.", "Could you please rephrase that?", "I'm not sure what you mean."])
+        return random.choice(load_default_responses())
