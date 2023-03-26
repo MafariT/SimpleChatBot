@@ -1,3 +1,4 @@
+import time
 import threading
 import nltk
 import tkinter as tk
@@ -24,7 +25,7 @@ class ChatbotUI(ttk.Frame):
         self.messages_frame.pack(fill="both", expand=True)
 
         # Chatbox
-        self.chatbox = tk.Text(self.messages_frame, height=20, width=80, font=("Segoe UI", 12))
+        self.chatbox = tk.Text(self.messages_frame, height=20, width=80, font=("Segoe UI", 12), wrap="word")
         self.chatbox.pack(side=tk.LEFT, fill="both", expand=True)
 
         # Scrollbar
@@ -66,7 +67,14 @@ class ChatbotUI(ttk.Frame):
         response = chatbot(message)
         self.chatbox.config(state="normal")
         self.chatbox.insert(tk.END, f"{BOT_NAME}: ", "bot")
-        self.chatbox.insert(tk.END, f"{response}\n")
+        
+        for char in response:
+            self.chatbox.insert(tk.END, char)
+            self.chatbox.see(tk.END)
+            self.update_idletasks()  # Force update of the UI
+            time.sleep(0.01)  # Small delay between each character
+        
+        self.chatbox.insert(tk.END, "\n")
         self.chatbox.config(state="disabled")
         self.chatbox.see(tk.END)
 
