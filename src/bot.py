@@ -38,6 +38,7 @@ def tokenize_and_lemmatize(user_input):
 
 def chatbot(user_input):
     logger.info(f'User said: {user_input}')
+    user_input = user_input.lower()
     lemmas = tokenize_and_lemmatize(user_input)
     response = get_response(user_input, lemmas, responses)
     logger.info(f'{BOT_NAME} said: {response}')
@@ -68,7 +69,7 @@ def get_response(user_input, lemmas, responses):
 
 
 def get_default_response(user_input, lemmas, responses):
-    if len(user_input) <= 5 and user_input.lower() not in excluded_words:
+    if user_input.lower().startswith("i ") or (len(user_input) <= 5 and user_input.lower() not in excluded_words):
         return random.choice(default_responses)
 
     for key in responses.keys():
