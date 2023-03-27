@@ -70,11 +70,7 @@ def get_math_calc(user_input):
         response = f"The result of the calculation is {result}!"
     except SyntaxError:
         response = "Invalid expression"
-    except UnsupportedNodeTypeError as e:
-        response = str(e)
-    except UnsupportedFunctionError as e:
-        response = str(e)
-    except UnsupportedOperatorError as e:
+    except (UnsupportedNodeTypeError, UnsupportedFunctionError, UnsupportedOperatorError) as e:
         response = str(e)
     except Exception as e:
         logger.error(f"Error occurred while performing calculation: {expression}", exc_info=True)
