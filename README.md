@@ -23,7 +23,7 @@ Here are some examples of things you can say to the chatbot:
 - math [expression]: Calculates the given mathematical expression
 - day: Provides information on the current day
 - time: Provides information on the current time
-- weather: Provides weather information for the specified location
+- weather: Provides weather information
 
         
 Additionally, each command has alternative phrasings that can be used to trigger the corresponding action
