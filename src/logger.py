@@ -13,11 +13,12 @@ def setup_logger(name, log_file, level=logging.DEBUG):
     formatter = logging.Formatter(
         "[%(asctime)s] [%(levelname)s] [%(filename)s:%(lineno)s] %(message)s",
         "%Y-%m-%d %H:%M:%S")
-
+    
     file_handler = RotatingFileHandler(
         log_file,
         maxBytes=1024 * 1024,
-        backupCount=10)
+        backupCount=10,
+        encoding='utf-8')
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
