@@ -41,6 +41,7 @@ class ChatbotUI(ttk.Frame):
         self.input_field = ttk.Entry(self.input_frame, width=80, font=("Segoe UI", 12))
         self.input_field.pack(side=tk.LEFT, fill="x", expand=True, padx=5, pady=5)
         self.input_field.bind("<Return>", self.send_message)
+        self.input_field.focus_set()
 
         # Send button
         self.send_button = ttk.Button(self.input_frame, text="Send", command=self.send_message)
