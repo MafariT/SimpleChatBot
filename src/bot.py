@@ -11,11 +11,12 @@ from nltk.stem import WordNetLemmatizer
 from textblob import TextBlob
 
 
-def get_help_info():
-    response = "Here are the things you can ask me:\n" + "\n".join(commands)
+def get_help_info(info_type):
+    if info_type == 'help':
+        return "Here are the things you can ask me:\n" + "\n".join(help)
+    elif info_type == 'help math':
+        return "To use the math command, enter an expression to evaluate:\n" + "\n".join(help_math)
     
-    return response
-
 
 def get_date_time_info(info_type):
     now = datetime.datetime.now()
@@ -45,10 +46,12 @@ def chatbot(user_input):
 
 
 def get_response(user_input, lemmas, responses):
-    if "translate" in lemmas:
+    if 'help' in user_input:
+        response = get_help_info(user_input)
+    elif 'help math' in user_input:
+        responses = get_help_info(user_input)
+    elif "translate" in lemmas:
         response = translate_text_from_input(lemmas)
-    elif 'help' in lemmas:
-        response = get_help_info()
     elif 'day' in lemmas:
         response = get_date_time_info('day')
     elif 'time' in lemmas:
