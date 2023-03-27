@@ -1,5 +1,5 @@
 {
-    "responses": {
+    "general_responses": {
         "hello": [
             "Hi there!",
             "Hello!",
@@ -101,7 +101,7 @@
         "I'm here to listen. What's going on?",
         "I'm sorry you're feeling that way. Is there anything I can do to help?"
     ],
-    "help": [
+    "help_general": [
         "- help: displays a list of available commands and their descriptions",
         "- translate [text] to [language]: Translates the given text to the specified language",
         "- math [expression]: Calculates the given mathematical expression (help math for more details)",

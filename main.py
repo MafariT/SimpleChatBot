@@ -1,7 +1,7 @@
 import time
 import threading
-import nltk
 import tkinter as tk
+import nltk
 from tkinter import ttk
 from src.bot import chatbot
 from src.config import BOT_NAME
@@ -52,6 +52,10 @@ class ChatbotUI(ttk.Frame):
         self.chatbox.tag_configure("bot", foreground="#28a745", font=("Segoe UI", 12, "bold"))
 
     def send_message(self, event: tk.Event =None) -> None:
+        # The following variable is intentionally unused
+        # If it removed the ENTER key doenst work
+        _ = event
+        
         message = self.input_field.get()
         self.input_field.delete(0, tk.END)
         self.chatbox.config(state="normal")
@@ -82,7 +86,7 @@ class ChatbotUI(ttk.Frame):
         # Enable send button
         self.send_button.configure(state="normal") 
         self.input_field.bind("<Return>", self.send_message)
-        
+
         self.chatbox.insert(tk.END, "\n")
         self.chatbox.config(state="disabled")
         self.chatbox.see(tk.END)

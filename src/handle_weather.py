@@ -11,7 +11,7 @@ def get_location() -> tuple:
 
 def get_forecast(lat: float, lon: float) -> dict:
     url = f'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={WEATHER_API_KEY}&units=metric'
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
 
     if response.status_code == 200:
         data = response.json()
@@ -79,7 +79,7 @@ def get_weather_info() -> str:
             response = "Sorry, I couldn't retrieve the weather information at this time."
     except Exception as e:
         logger.error(f"An error occurred while retrieving the weather information. Exception: {e}", exc_info=True)
-        response = f"An error occurred while retrieving the weather information. Please check the log file for more information on the error."
+        response = "An error occurred while retrieving the weather information. Please check the log file for more information on the error."
 
     return response
 

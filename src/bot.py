@@ -5,16 +5,23 @@ from nltk.stem import WordNetLemmatizer
 from textblob import TextBlob
 from src.config import BOT_NAME
 from src.logger import logger
-from src.data_loader import *
 from src.handle_weather import get_weather_info
 from src.handle_math import get_math_calc
 from src.handle_translate import translate_text_from_input
 from src.handle_wolframalpha import get_wolframalpha_response
-
+from src.data_loader import (
+    help_general,
+    help_math,
+    general_responses,
+    default_responses,
+    excluded_words,
+    good_sentiment_responses,
+    bad_sentiment_responses
+)
 
 def get_help_info(info_type: str) -> str:
     if info_type == 'help':
-        return "Here are the things you can ask me:\n" + "\n".join(help)
+        return "Here are the things you can ask me:\n" + "\n".join(help_general)
     elif info_type == 'help math':
         return "To use the math command, enter an expression to evaluate:\n" + "\n".join(help_math)
     else:
@@ -43,7 +50,7 @@ def chatbot(user_input: str) -> str:
     logger.info(f'User said: {user_input}')
     user_input = user_input.lower()
     lemmas = tokenize_and_lemmatize(user_input)
-    response = get_response(user_input, lemmas, responses)
+    response = get_response(user_input, lemmas, general_responses)
     logger.info(f'{BOT_NAME} said: {response}')
     
     return response
@@ -66,7 +73,6 @@ def get_response(user_input: str, lemmas: str, responses: str) -> str:
         response = get_weather_info()
     elif 'math' in lemmas and len(lemmas) > 1:
         response = get_math_calc(user_input)
-        logger.info(f'User said: {response}')
     else:
         response = get_default_response(user_input, lemmas, responses)
 
