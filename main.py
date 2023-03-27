@@ -54,6 +54,10 @@ class ChatbotUI(ttk.Frame):
         message = self.input_field.get()
         self.input_field.delete(0, tk.END)
         self.chatbox.config(state="normal")
+        
+        # Disabled send button
+        self.send_button.configure(state="disabled")
+        self.input_field.unbind("<Return>")
 
         # Add user message with different font color and style
         self.chatbox.insert(tk.END, "You: ", "user")
@@ -73,6 +77,10 @@ class ChatbotUI(ttk.Frame):
             self.chatbox.see(tk.END)
             self.update_idletasks()  # Force update of the UI
             time.sleep(0.01)  # Small delay between each character
+        
+        # Enable send button
+        self.send_button.configure(state="normal") 
+        self.input_field.bind("<Return>", self.send_message)
         
         self.chatbox.insert(tk.END, "\n")
         self.chatbox.config(state="disabled")
