@@ -16,6 +16,8 @@ def get_help_info(info_type):
         return "Here are the things you can ask me:\n" + "\n".join(help)
     elif info_type == 'help math':
         return "To use the math command, enter an expression to evaluate:\n" + "\n".join(help_math)
+    else:
+        return "Invalid info type specified."
     
 
 def get_date_time_info(info_type):
