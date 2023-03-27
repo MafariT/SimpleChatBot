@@ -6,6 +6,7 @@ from src.data_loader import *
 from src.handle_weather import get_weather_info
 from src.handle_math import get_math_calc
 from src.handle_translate import translate_text_from_input
+from src.handle_wolframalpha import get_wolframalpha_response
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from textblob import TextBlob
@@ -53,6 +54,8 @@ def get_response(user_input, lemmas, responses):
         response = get_help_info(user_input)
     elif 'help math' in user_input:
         responses = get_help_info(user_input)
+    elif 'alpha' in user_input:
+        response = get_wolframalpha_response(user_input)
     elif "translate" in lemmas:
         response = translate_text_from_input(lemmas)
     elif 'day' in lemmas:
