@@ -101,15 +101,34 @@
         "I'm here to listen. What's going on?",
         "I'm sorry you're feeling that way. Is there anything I can do to help?"
     ],
-    "commands": [
+    "help": [
         "- help: displays a list of available commands and their descriptions",
         "- translate [text] to [language]: Translates the given text to the specified language",
-        "- math [expression]: Calculates the given mathematical expression",
+        "- math [expression]: Calculates the given mathematical expression (help math for more details)",
         "- day: Provides information on the current day",
         "- time: Provides information on the current time",
         "- weather: Provides weather information",
         "Additionally, each command has alternative phrasings that can be used to trigger the corresponding action",
         "For example, instead of typing 'time', you can ask 'What time is it?' and the chatbot will provide the current time."
+    ],
+    "help_math": [
+        "The following operators are supported:",
+        "- Addition: +",
+        "- Subtraction: -",
+        "- Multiplication: *",
+        "- Division: /",
+        "- Modulo: %",
+        "- Power: **",
+        "The following functions are supported:",
+        "- Square root: sqrt(number)",
+        "- Sine: sin(number)",
+        "- Cosine: cos(number)",
+        "- Tangent: tan(number)",
+        "- Logarithm: log(number, base)",
+        "Example expressions:",
+        "- math 2 + 3",
+        "- math sqrt(16)",
+        "- math sin(0.5) * 10"
     ],
     "excluded_words": [
         "hi",
