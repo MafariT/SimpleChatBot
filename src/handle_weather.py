@@ -5,11 +5,11 @@ from src.logger import logger
 from src.config import WEATHER_API_KEY
 
 
-def get_location():
+def get_location() -> tuple:
     g = geocoder.ip('me')
     return g.city, g.latlng
 
-def get_forecast(lat, lon):
+def get_forecast(lat: float, lon: float) -> dict:
     url = f'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={WEATHER_API_KEY}&units=metric'
     response = requests.get(url)
 
@@ -19,7 +19,7 @@ def get_forecast(lat, lon):
     else:
         return None
 
-def format_temperature_data(data):
+def format_temperature_data(data: dict) -> tuple:
     temperature_data = []
     time_data = []
     for entry in data['list'][:8]:
@@ -33,7 +33,7 @@ def format_temperature_data(data):
 
     return time_data, temperature_data
 
-def format_weather_data(data):
+def format_weather_data(data: dict) -> list:
     weather_data = []
     for entry in data['list']:
         timestamp = entry['dt']
@@ -45,7 +45,7 @@ def format_weather_data(data):
 
     return weather_data
 
-def group_weather_data(weather_data):
+def group_weather_data(weather_data: list) -> dict:
     grouped_weather_data = {}
     for date, temperature, humidity, description in weather_data:
         if date not in grouped_weather_data:
@@ -54,7 +54,7 @@ def group_weather_data(weather_data):
 
     return grouped_weather_data
 
-def get_weather_info():
+def get_weather_info() -> str:
     try:
         city, (lat, lon) = get_location()
 
@@ -78,7 +78,7 @@ def get_weather_info():
         else:
             response = "Sorry, I couldn't retrieve the weather information at this time."
     except Exception as e:
-        logger.error(f"An error occurred while retrieving the weather information: {e}", exc_info=True)
+        logger.error(f"An error occurred while retrieving the weather information. Exception: {e}", exc_info=True)
         response = f"An error occurred while retrieving the weather information. Please check the log file for more information on the error."
 
     return response

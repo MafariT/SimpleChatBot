@@ -2,7 +2,7 @@ import json
 import threading
 
 
-def load_data(key):
+def load_data(key: dict) -> dict:
     with open('src/data/chat_data.json') as f:
         data = json.load(f)[key]
     return data

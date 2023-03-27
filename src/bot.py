@@ -1,5 +1,8 @@
 import random
 import datetime
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+from textblob import TextBlob
 from src.config import BOT_NAME
 from src.logger import logger
 from src.data_loader import *
@@ -7,12 +10,9 @@ from src.handle_weather import get_weather_info
 from src.handle_math import get_math_calc
 from src.handle_translate import translate_text_from_input
 from src.handle_wolframalpha import get_wolframalpha_response
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
-from textblob import TextBlob
 
 
-def get_help_info(info_type):
+def get_help_info(info_type: str) -> str:
     if info_type == 'help':
         return "Here are the things you can ask me:\n" + "\n".join(help)
     elif info_type == 'help math':
@@ -21,7 +21,7 @@ def get_help_info(info_type):
         return "Invalid info type specified."
     
 
-def get_date_time_info(info_type):
+def get_date_time_info(info_type: str) -> str:
     now = datetime.datetime.now()
     if info_type == 'day':
         return f"Today is {now.strftime('%A, %B %d, %Y')}."
@@ -31,7 +31,7 @@ def get_date_time_info(info_type):
         return "Invalid info type specified."
 
 
-def tokenize_and_lemmatize(user_input):
+def tokenize_and_lemmatize(user_input: str) -> str:
     tokens = word_tokenize(user_input)
     lemmatizer = WordNetLemmatizer()
     lemmas = [lemmatizer.lemmatize(token) for token in tokens]
@@ -39,7 +39,7 @@ def tokenize_and_lemmatize(user_input):
     return lemmas
 
 
-def chatbot(user_input):
+def chatbot(user_input: str) -> str:
     logger.info(f'User said: {user_input}')
     user_input = user_input.lower()
     lemmas = tokenize_and_lemmatize(user_input)
@@ -49,7 +49,7 @@ def chatbot(user_input):
     return response
 
 
-def get_response(user_input, lemmas, responses):
+def get_response(user_input: str, lemmas: str, responses: str) -> str:
     if 'help' in user_input:
         response = get_help_info(user_input)
     elif 'help math' in user_input:
@@ -73,7 +73,7 @@ def get_response(user_input, lemmas, responses):
     return response
 
 
-def get_default_response(user_input, lemmas, responses):
+def get_default_response(user_input: str, lemmas: str, responses: str) -> str:
     if user_input.lower().startswith("i ") or (len(user_input) <= 5 and user_input.lower() not in excluded_words):
         return random.choice(default_responses)
 
@@ -84,7 +84,7 @@ def get_default_response(user_input, lemmas, responses):
     return get_sentiment_response(user_input)
 
 
-def get_sentiment_response(user_input):
+def get_sentiment_response(user_input: str) -> str:
     blob = TextBlob(user_input)
     sentiment = blob.sentiment.polarity
     if sentiment > 0.5:

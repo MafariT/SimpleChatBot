@@ -1,5 +1,6 @@
 import math
 import ast
+from typing import Union
 from src.logger import logger
 
 
@@ -31,7 +32,7 @@ class ExpressionEvaluator:
         'log': lambda x, y=None: math.log(x, y),
     }
 
-    def evaluate(self, node):
+    def evaluate(self, node: ast.AST) -> Union[int, float]:
         if isinstance(node, ast.Num):
             return node.n
         elif isinstance(node, ast.BinOp):
@@ -41,7 +42,7 @@ class ExpressionEvaluator:
         else:
             raise UnsupportedNodeTypeError(f"Unsupported node type: {type(node)}")
 
-    def _evaluate_binop(self, node):
+    def _evaluate_binop(self, node: ast.BinOp) -> Union[int, float]:
         left = self.evaluate(node.left)
         right = self.evaluate(node.right)
         operator = node.op
@@ -51,7 +52,7 @@ class ExpressionEvaluator:
         else:
             raise UnsupportedOperatorError(f"Unsupported operator: {operator}")
 
-    def _evaluate_call(self, node):
+    def _evaluate_call(self, node: ast.Call) -> Union[int, float]:
         func = node.func.id
         args = [self.evaluate(arg) for arg in node.args]
         func_func = self.FUNCTIONS.get(func)
@@ -61,7 +62,7 @@ class ExpressionEvaluator:
             raise UnsupportedFunctionError(f"Unsupported function: {func}")
 
 
-def get_math_calc(user_input):
+def get_math_calc(user_input: str) -> str:
     try:
         expression = user_input.split('math ')[1]
         node = ast.parse(expression, mode='eval')
@@ -73,7 +74,7 @@ def get_math_calc(user_input):
     except (UnsupportedNodeTypeError, UnsupportedFunctionError, UnsupportedOperatorError) as e:
         response = str(e)
     except Exception as e:
-        logger.error(f"Error occurred while performing calculation: {expression}", exc_info=True)
+        logger.error(f"Error occurred while performing calculation: {expression}. Exception: {e}", exc_info=True)
         response = "Sorry, I couldn't perform that calculation. Please check the log file for more information on the error."
 
     return response

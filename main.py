@@ -7,19 +7,19 @@ from src.bot import chatbot
 from src.config import BOT_NAME
 
 
-def download_nltk_data():
+def download_nltk_data() -> None:
     nltk.download('punkt', quiet=True)
     nltk.download('wordnet', quiet=True)
 
 
 class ChatbotUI(ttk.Frame):
-    def __init__(self, master=None):
+    def __init__(self, master: tk.Tk =None) -> None:
         super().__init__(master)
         self.master = master
         self.pack(fill="both", expand=True)
         self.create_widgets()
 
-    def create_widgets(self):
+    def create_widgets(self) -> None:
         # Messages frame
         self.messages_frame = ttk.Frame(self, padding=10)
         self.messages_frame.pack(fill="both", expand=True)
@@ -51,7 +51,7 @@ class ChatbotUI(ttk.Frame):
         self.chatbox.tag_configure("user", foreground="#007bff", font=("Segoe UI", 12, "bold"))
         self.chatbox.tag_configure("bot", foreground="#28a745", font=("Segoe UI", 12, "bold"))
 
-    def send_message(self, event=None):
+    def send_message(self, event: tk.Event =None) -> None:
         message = self.input_field.get()
         self.input_field.delete(0, tk.END)
         self.chatbox.config(state="normal")
@@ -67,7 +67,7 @@ class ChatbotUI(ttk.Frame):
         # Start a new thread to handle the chatbot logic
         threading.Thread(target=self.handle_chatbot_response, args=(message,), daemon=True).start()
 
-    def handle_chatbot_response(self, message):
+    def handle_chatbot_response(self, message: str) -> None:
         # Add bot response with different font color and style
         response = chatbot(message)
         self.chatbox.config(state="normal")
@@ -87,7 +87,7 @@ class ChatbotUI(ttk.Frame):
         self.chatbox.config(state="disabled")
         self.chatbox.see(tk.END)
 
-    def run(self):
+    def run(self) -> None:
         threading.Thread(target=download_nltk_data).start()
         self.master.mainloop()
 
