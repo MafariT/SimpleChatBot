@@ -14,4 +14,4 @@ def get_wolframalpha_response(user_input: str) -> str:
             return "I'm sorry, I couldn't find an answer to your question"
     except Exception as e:
         logger.error(f"Error occurred while parsing {query}. Exception: {e}", exc_info=True)
-        return f"An error occurred while parsing {query}. Please check the log file for more information on the error."
+        return f"An error occurred while parsing '{query}'. Please check the log file for more information on the error"

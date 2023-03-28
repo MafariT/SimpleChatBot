@@ -17,5 +17,5 @@ def translate_text_from_input(lemmas: str) -> str:
         translated_text = GoogleTranslator(source='auto', target=target_language).translate(text_to_translate)
     except Exception as e:
         logger.error(f"Error occurred while translating text: {text_to_translate}. Exception: {e}", exc_info=True)
-        translated_text = f"An error occurred while translating the text: '{text_to_translate}'. Please check the log file for more information on the error."
+        translated_text = f"An error occurred while translating the text: '{text_to_translate}'. Please check the log file for more information on the error"
     return translated_text

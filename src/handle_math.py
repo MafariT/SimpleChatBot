@@ -75,6 +75,6 @@ def get_math_calc(user_input: str) -> str:
         response = str(e)
     except Exception as e:
         logger.error(f"Error occurred while performing calculation: {expression}. Exception: {e}", exc_info=True)
-        response = "Sorry, I couldn't perform that calculation. Please check the log file for more information on the error."
+        response = f"Error occurred while performing '{expression}'. Please check the log file for more information on the error"
 
     return response

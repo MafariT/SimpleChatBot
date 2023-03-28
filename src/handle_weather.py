@@ -79,7 +79,7 @@ def get_weather_info() -> str:
             response = "Sorry, I couldn't retrieve the weather information at this time."
     except Exception as e:
         logger.error(f"An error occurred while retrieving the weather information. Exception: {e}", exc_info=True)
-        response = "An error occurred while retrieving the weather information. Please check the log file for more information on the error."
+        response = "An error occurred while retrieving the weather information. Please check the log file for more information on the error"
 
     return response
 
