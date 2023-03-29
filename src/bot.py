@@ -48,19 +48,21 @@ def tokenize_and_lemmatize(user_input: str) -> str:
 
 def chatbot(user_input: str) -> str:
     logger.info(f'User said: {user_input}')
+    
     user_input = user_input.lower()
     lemmas = tokenize_and_lemmatize(user_input)
     response = get_response(user_input, lemmas, general_responses)
+    
     logger.info(f'{BOT_NAME} said: {response}')
     
     return response
 
 
-def get_response(user_input: str, lemmas: str, responses: str) -> str:
+def get_response(user_input: str, lemmas: str, general_responses: str) -> str:
     if 'help' in user_input:
         response = get_help_info(user_input)
     elif 'help math' in user_input:
-        responses = get_help_info(user_input)
+        response = get_help_info(user_input)
     elif 'alpha' in user_input:
         response = get_wolframalpha_response(user_input)
     elif "translate" in lemmas:
@@ -74,18 +76,18 @@ def get_response(user_input: str, lemmas: str, responses: str) -> str:
     elif 'math' in lemmas and len(lemmas) > 1:
         response = get_math_calc(user_input)
     else:
-        response = get_default_response(user_input, lemmas, responses)
+        response = get_default_response(user_input, lemmas, general_responses)
 
     return response
 
 
-def get_default_response(user_input: str, lemmas: str, responses: str) -> str:
+def get_default_response(user_input: str, lemmas: str, general_responses: str) -> str:
     if user_input.lower().startswith("i ") or (len(user_input) <= 5 and user_input.lower() not in excluded_words):
         return random.choice(default_responses)
 
-    for key in responses.keys():
+    for key in general_responses.keys():
         if any(lemma in key for lemma in lemmas):
-            return random.choice(responses[key])
+            return random.choice(general_responses[key])
 
     return get_sentiment_response(user_input)
 
