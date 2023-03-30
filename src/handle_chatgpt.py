@@ -1,4 +1,5 @@
 from revChatGPT.V3 import Chatbot
+from src.logger import logger
 from src.config import CHATGPT_API_KEY
 
 
@@ -16,8 +17,12 @@ chatgpt = Chatbot(api_key=CHATGPT_API_KEY,
 
 
 def gpt(user_input :str) -> str:
-    message = user_input[5:].strip()
-    chatgpt.ask(prompt=message, role="user", convo_id="default")
-    responses = chatgpt.conversation["default"][-1]["content"]
+    try:
+        message = user_input[4:].strip()
+        chatgpt.ask(prompt=message, role="user", convo_id="default")
+        responses = chatgpt.conversation["default"][-1]["content"]
+    except Exception as e:
+        logger.error(f"Error occurred while parsing '{message}'. Exception: {e}", exc_info=True)
+        responses = f"An error occurred while parsing '{message}'. Please check the log file for more information on the error"
     
     return responses
