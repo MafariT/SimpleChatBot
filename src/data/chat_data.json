@@ -103,6 +103,8 @@
     ],
     "help_general": [
         "- help: displays a list of available commands and their descriptions",
+        "- gpt [message]: To interact with ChatGPT",
+        "- alpha [message]: To interact with WolframAlpha",
         "- translate [text] to [language]: Translates the given text to the specified language",
         "- math [expression]: Calculates the given mathematical expression (help math for more details)",
         "- day: Provides information on the current day",
