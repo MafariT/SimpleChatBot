@@ -7,6 +7,8 @@ You need to install the following Python packages:
 - textblob
 - nltk
 - deep_translator
+- wolframalpha
+- revchatgpt
 
 You can install these packages using the following command:
 ```
@@ -36,4 +38,4 @@ To use Weather, WolframAlpha, ChatGPT feature, you need to get the api keys from
 - [WolframAlpha](https://products.wolframalpha.com/api/)
 - [ChatGPT](https://platform.openai.com/account/api-keys)
 
-you can add it to your ```config.py``` file under ```API_KEY = 'YOUR_API_KEY'```
+You can add it to your ```config.py``` file under ```API_KEY = 'YOUR_API_KEY'```
