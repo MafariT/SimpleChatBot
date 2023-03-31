@@ -19,8 +19,10 @@ To use SimpleChatBot, download the executable from the [Releases](https://github
 Here are some examples of things you can say to the chatbot:
 
 - help: displays a list of available commands and their descriptions
+- gpt [message]: To interact with ChatGPT
+- alpha [message]: To interact with WolframAlpha
 - translate [text] to [language]: Translates the given text to the specified language
-- math [expression]: Calculates the given mathematical expression
+- math [expression]: Calculates the given mathematical expression (help math for more details)
 - day: Provides information on the current day
 - time: Provides information on the current time
 - weather: Provides weather information
@@ -29,4 +31,9 @@ Here are some examples of things you can say to the chatbot:
 Additionally, each command has alternative phrasings that can be used to trigger the corresponding action
 For example, instead of typing 'time', you can ask 'What time is it?' and the chatbot will provide the current time
 
-To use the weather feature, you will need to obtain an API key from [OpenWeather](https://openweathermap.org/). Once you have obtained the key, you can add it to your ```config.py``` file under ```WEATHER_API_KEY = 'YOUR_API_KEY'```
+To use Weather, WolframAlpha, ChatGPT feature, you need to get the api keys from
+- [OpenWeather](https://openweathermap.org/)
+- [WolframAlpha](https://products.wolframalpha.com/api/)
+- [ChatGPT](https://platform.openai.com/account/api-keys)
+
+you can add it to your ```config.py``` file under ```API_KEY = 'YOUR_API_KEY'```
