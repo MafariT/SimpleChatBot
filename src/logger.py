@@ -2,6 +2,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 from src.config import LOGGING_ENABLED, CONSOLE_LOGGING_ENABLED
 
+"""
+This module contains the logger for the chatbot.
+"""
 
 def setup_logger(name: str, log_file: str, level: int = logging.DEBUG) -> logging.Logger:
     # create a new logger instance with the given name

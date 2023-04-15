@@ -13,6 +13,8 @@ class UnsupportedFunctionError(TypeError):
 class UnsupportedOperatorError(TypeError):
     pass
 
+# This class is used to evaluate math expressions.
+# It uses the Python AST module to parse the expression.
 
 class ExpressionEvaluator:
     OPERATORS = {

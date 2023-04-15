@@ -1,3 +1,4 @@
+# Please edit the following variables to match your environment
 WEATHER_API_KEY = 'YOUR_API_KEY'
 WOLFRAMALPHA_API_KEY = 'YOUR_API_KEY'
 CHATGPT_API_KEY = 'YOUR_API_KEY'
