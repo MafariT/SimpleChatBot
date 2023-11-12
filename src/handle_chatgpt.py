@@ -3,7 +3,6 @@ from src.logger import logger
 from src.config import CHATGPT_API_KEY
 
 
-# Initialize ChatGPT
 chatgpt = Chatbot(api_key=CHATGPT_API_KEY,
                 engine="gpt-3.5-turbo",
                 proxy=None,
