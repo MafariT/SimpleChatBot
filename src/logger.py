@@ -7,7 +7,6 @@ This module contains the logger for the chatbot.
 """
 
 def setup_logger(name: str, log_file: str, level: int = logging.DEBUG) -> logging.Logger:
-    # create a new logger instance with the given name
     inner_logger = logging.getLogger(name)
 
     # if logging is not enabled, add a null handler and return the logger
