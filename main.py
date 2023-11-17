@@ -52,10 +52,6 @@ class ChatbotUI(ttk.Frame):
         self.chatbox.tag_configure("bot", foreground="#28a745", font=("Segoe UI", 12, "bold"))
 
     def send_message(self, event: tk.Event =None) -> None:
-        # The following variable is intentionally unused
-        # If it removed the ENTER key doenst work
-        _ = event
-        
         message = self.input_field.get()
         self.input_field.delete(0, tk.END)
         self.chatbox.config(state="normal")
@@ -68,20 +64,19 @@ class ChatbotUI(ttk.Frame):
         self.chatbox.insert(tk.END, "You: ", "user")
         self.chatbox.insert(tk.END, f"{message}\n")
 
-        # Start a new thread to handle the chatbot logic
         threading.Thread(target=self.handle_chatbot_response, args=(message,), daemon=True).start()
 
     def handle_chatbot_response(self, message: str) -> None:
         # Add bot response with different font color and style
         response = chatbot(message)
         self.chatbox.config(state="normal")
-        self.chatbox.insert(tk.END, f"{BOT_NAME}: ", "bot")
+        self.chatbox.insert(tk.END, f"{BOT_NAME}: ", "bot", response)
         
-        for char in response:
-            self.chatbox.insert(tk.END, char)
-            self.chatbox.see(tk.END)
-            self.update_idletasks()  # Force update of the UI
-            time.sleep(0.01)  # Small delay between each character
+        # for char in response:
+        #     self.chatbox.insert(tk.END, char)
+        #     self.chatbox.see(tk.END)
+        #     self.update_idletasks()  
+        #     time.sleep(0.001)  # Small delay between each character
         
         # Enable send button
         self.send_button.configure(state="normal") 
