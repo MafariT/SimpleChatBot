@@ -3,7 +3,6 @@ from src.logger import logger
 
 def translate_text_from_input(lemmas: str) -> str:
     try:
-        # Extract text to translate and target language from lemmas
         translate_index = lemmas.index("translate")
         text_to_translate = " ".join(lemmas[translate_index + 1:])
 
@@ -14,12 +13,10 @@ def translate_text_from_input(lemmas: str) -> str:
         else:
             target_language = "en"
 
-        # Translate the text
         translator = GoogleTranslator(source='auto', target=target_language)
         translated_text = translator.translate(text_to_translate)
 
     except Exception as e:
-        # Log and handle translation errors
         logger.error(f"Error occurred while translating text: {text_to_translate}. Exception: {e}", exc_info=True)
         translated_text = f"An error occurred while translating the text: '{text_to_translate}'. Please check the log file for more information on the error"
 
