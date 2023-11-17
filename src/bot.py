@@ -61,8 +61,6 @@ def chatbot(user_input: str) -> str:
 def get_response(user_input: str, lemmas: str, general_responses: str) -> str:
     if 'help' in user_input or 'help math' in user_input:
         response = get_help_info(user_input)
-    # elif 'gpt' in user_input:
-    #     response = gpt(user_input)
     elif 'alpha' in user_input:
         response = get_wolframalpha_response(user_input)
     elif "translate" in lemmas:
