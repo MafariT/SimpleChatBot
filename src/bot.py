@@ -9,7 +9,6 @@ from src.handle_weather import get_weather_info
 from src.handle_math import get_math_calc
 from src.handle_translate import translate_text_from_input
 from src.handle_wolframalpha import get_wolframalpha_response
-from src.handle_chatgpt import gpt
 from src.data_loader import (
     help_general,
     help_math,
@@ -62,8 +61,8 @@ def chatbot(user_input: str) -> str:
 def get_response(user_input: str, lemmas: str, general_responses: str) -> str:
     if 'help' in user_input or 'help math' in user_input:
         response = get_help_info(user_input)
-    elif 'gpt' in user_input:
-        response = gpt(user_input)
+    # elif 'gpt' in user_input:
+    #     response = gpt(user_input)
     elif 'alpha' in user_input:
         response = get_wolframalpha_response(user_input)
     elif "translate" in lemmas:
